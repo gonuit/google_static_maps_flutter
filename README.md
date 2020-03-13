@@ -73,3 +73,5 @@ The package provides simple access to the Google Static Maps service.
   }
 ```
 
+## Example:
+![map_screenshot](./readme/screen.png)
