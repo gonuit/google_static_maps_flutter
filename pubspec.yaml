@@ -1,0 +1,20 @@
+name: google_static_maps_controller
+description: The package provides simple access to the Google Static Maps service.
+repository: https://github.com/gonuit/flutter_google_static_maps
+homepage: https://github.com/gonuit/flutter_google_static_maps
+issue_tracker: https://github.com/gonuit/flutter_google_static_maps/issues
+
+version: 0.0.1
+
+environment:
+  sdk: ">=2.6.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
