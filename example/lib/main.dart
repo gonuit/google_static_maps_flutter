@@ -34,9 +34,9 @@ class MyHomePage extends StatelessWidget {
               Location(-3.1467579, -59.8753814),
             ],
           ),
-          Marker(
-            color: Colors.lightGreen,
-            label: "B",
+          Marker.custom(
+            anchor: MarkerAnchor.bottom,
+            icon: "https://goo.gl/1oTJ9Y",
             locations: [
               Location(-3.1694166, -60.1041517),
             ],
