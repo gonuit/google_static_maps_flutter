@@ -9,13 +9,13 @@ void main() {
         googleApiKey: _mockedGoogleApiKey,
         width: 200,
         height: 300,
-        center: Location(10, 20),
-        zoom: 5,
+        center: Location(-3.1467579, -59.8753814),
+        zoom: 10,
         styles: [
           MapStyle(
             element: StyleElement.geometry,
             rules: [
-              StyleRule.color(Colors.red),
+              StyleRule.hue(Colors.red),
               StyleRule.lightness(20),
               StyleRule.saturation(-20),
               StyleRule.visibility(VisibilityRule.on),
@@ -36,9 +36,10 @@ void main() {
         "https://maps.googleapis.com/maps/api/staticmap"
         "?key=GOOGLE_API_KEY"
         "&size=200x300"
-        "&zoom=5"
+        "&center=-3.1467579%2C+-59.87538140000001"
+        "&zoom=10"
         "&style=element%3Ageometry"
-        "%7Ccolor%3A0xf44336"
+        "%7Chue%3A0xf44336"
         "%7Clightness%3A20"
         "%7Csaturation%3A-20"
         "%7Cvisibility%3Aon"
@@ -48,5 +49,6 @@ void main() {
         "%7Ccolor%3A0x4caf50",
       ),
     );
+    print(controller.url.toString());
   });
 }

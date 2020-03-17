@@ -66,6 +66,10 @@ class StaticMapController {
 
     params["key"] = googleApiKey;
     params["size"] = "${width}x$height";
+
+    /// TODO: center could be string
+    if (center != null)
+      params["center"] = "${center.latitude}, ${center.longitude}";
     if (language != null) params["language"] = language;
     if (maptype.value != null) params["maptype"] = maptype.value;
     if (zoom != null) params["zoom"] = zoom.toString();

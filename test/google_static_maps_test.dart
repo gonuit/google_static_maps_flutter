@@ -28,6 +28,7 @@ void main() {
         "https://maps.googleapis.com/maps/api/staticmap?"
         "key=GOOGLE_API_KEY"
         "&size=200x300"
+        "&center=20.0%2C+30.0"
         "&language=PL"
         "&maptype=satellite"
         "&zoom=10"

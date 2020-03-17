@@ -139,7 +139,7 @@ class MapStyle {
   /// existing styles, if present.
   final List<StyleRule> rules;
 
-  MapStyle({
+  const MapStyle({
     this.element,
     this.feature,
     @required this.rules,

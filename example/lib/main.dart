@@ -24,7 +24,7 @@ class MyHomePage extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         scaleToDevicePixelRatio: true,
-        googleApiKey: "AIzaSyAo35Mq4uBTZ7QhTCE-BQZOlIgaSEFcZqM",
+        googleApiKey: "<GOOGLE-API-KEY>",
         markers: <Marker>[
           Marker(
             color: Colors.lightBlue,
