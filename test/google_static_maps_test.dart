@@ -95,4 +95,69 @@ void main() {
         equals(value[1]),
       );
   });
+
+  test("Encodes custom marker correctly", () {
+    final marker = Marker.custom(
+      anchor: MarkerAnchor.top,
+      icon: "www.example.com/image",
+      locations: [
+        Location(20, 10),
+        Location(20, 20),
+      ],
+    );
+
+    expect(
+      marker.toUrlEncodedString(),
+      equals(
+        "anchor:top"
+        "|icon:www.example.com/image"
+        "|20.0, 10.0"
+        "|20.0, 20.0",
+      ),
+    );
+
+    final marker1 = Marker.custom(
+      anchor: MarkerAnchor(64, 0),
+      icon: "www.example.com/image",
+      locations: [
+        Location(20, 10),
+      ],
+    );
+
+    expect(
+      marker1.toUrlEncodedString(),
+      equals(
+        "anchor:64, 0"
+        "|icon:www.example.com/image"
+        "|20.0, 10.0",
+      ),
+    );
+  });
+
+  test("Build link with custom markers correctly", () {
+    final controller = StaticMapController(
+      googleApiKey: _mockGoogleApiKey,
+      height: 200,
+      width: 200,
+      markers: [
+        Marker.custom(icon: "www.example.com/image", locations: [
+          Location(20, 10),
+          Location(20, 20),
+        ])
+      ],
+    );
+
+    expect(
+      controller.url.toString(),
+      equals(
+        "https://maps.googleapis.com/maps/api/staticmap"
+        "?key=GOOGLE_API_KEY"
+        "&size=200x200"
+        "&markers="
+        "icon%3Awww.example.com%2Fimage"
+        "%7C20.0%2C+10.0"
+        "%7C20.0%2C+20.0",
+      ),
+    );
+  });
 }
