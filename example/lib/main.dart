@@ -25,6 +25,16 @@ class MyHomePage extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         scaleToDevicePixelRatio: true,
         googleApiKey: "<GOOGLE-API-KEY>",
+        styles: <MapStyle>[
+          MapStyle(
+            element: StyleElement.geometry.fill,
+            feature: StyleFeature.landscape.natural,
+            rules: <StyleRule>[
+              StyleRule.hue(Colors.blue),
+              StyleRule.lightness(-10),
+            ],
+          )
+        ],
         markers: <Marker>[
           Marker(
             color: Colors.lightBlue,

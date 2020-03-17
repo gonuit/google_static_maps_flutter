@@ -119,11 +119,6 @@ class StyleRule {
   String toString() => "$runtimeType($_key, $_value)";
 }
 
-/// Customize the presentation of the standard Google map by applying your own
-/// styles when using the Maps Static API. You can change the visual display of
-/// features such as roads, parks, built-up areas, and other points of interest.
-/// Change their color or style to emphasize particular content, complement
-/// surrounding content on the page, or even hide features completely.
 class MapStyle {
   final StyleFeature feature;
   final StyleElement element;
@@ -139,6 +134,11 @@ class MapStyle {
   /// existing styles, if present.
   final List<StyleRule> rules;
 
+  /// Customize the presentation of the standard Google map by applying your own
+  /// styles when using the Maps Static API. You can change the visual display of
+  /// features such as roads, parks, built-up areas, and other points of interest.
+  /// Change their color or style to emphasize particular content, complement
+  /// surrounding content on the page, or even hide features completely.
   const MapStyle({
     this.element,
     this.feature,

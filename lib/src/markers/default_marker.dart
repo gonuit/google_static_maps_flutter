@@ -23,8 +23,7 @@ class DefaultMarker extends Marker {
     final markerSize = size.value;
     if (markerSize != null) string += "size:$markerSize$_separator";
 
-    if (label != null)
-      string += "label:${label[0].toUpperCase()}$_separator";
+    if (label != null) string += "label:${label[0].toUpperCase()}$_separator";
 
     if (color != null)
       string += "color:${toHex24BitColorString(color)}$_separator";

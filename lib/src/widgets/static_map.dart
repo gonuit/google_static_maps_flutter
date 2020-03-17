@@ -2,6 +2,7 @@ part of google_static_maps_controller;
 
 class StaticMap extends StatelessWidget {
   final List<Marker> markers;
+  final List<MapStyle> styles;
 
   /// Defines the center of the map, equidistant from all edges of the map.
   final Location center;
@@ -76,6 +77,7 @@ class StaticMap extends StatelessWidget {
     this.language,
     this.region,
     this.signature,
+    this.styles,
     this.scaleToDevicePixelRatio = true,
   })  : assert(googleApiKey != null, "googleApiKey cannot be null"),
         super(key: key);
@@ -106,6 +108,7 @@ class StaticMap extends StatelessWidget {
             region: region,
             signature: signature,
             zoom: zoom,
+            styles: styles,
           );
 
           return Image.network(
