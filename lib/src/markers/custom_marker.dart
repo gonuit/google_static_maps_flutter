@@ -15,13 +15,13 @@ class CustomMarker extends Marker {
         ),
         super._(locations);
 
-  String toUrlEncodedString() {
+  String toUrlString() {
     String string = "";
     if (locations.isEmpty) return null;
 
-    if (anchor != null) string += "anchor:${anchor.value}$_markerSeparator";
+    if (anchor != null) string += "anchor:${anchor.value}$_separator";
 
-    string += "icon:$icon$_markerSeparator";
+    string += "icon:$icon$_separator";
 
     if (locations.isNotEmpty) string += _markerLocationsString;
 
