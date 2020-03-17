@@ -16,25 +16,17 @@ class DefaultMarker extends Marker {
         ),
         super._(locations);
 
-  String get _hex24BitColorString {
-    final hexColorString32Bit = color.value.toRadixString(16);
-    final hexColorString24Bit =
-        hexColorString32Bit.substring(2, hexColorString32Bit.length);
-    return hexColorString24Bit;
-  }
-
-  String toUrlEncodedString() {
+  String toUrlString() {
     String string = "";
     if (locations.isEmpty) return null;
 
     final markerSize = size.value;
-    if (markerSize != null) string += "size:$markerSize$_markerSeparator";
+    if (markerSize != null) string += "size:$markerSize$_separator";
 
-    if (label != null)
-      string += "label:${label[0].toUpperCase()}$_markerSeparator";
+    if (label != null) string += "label:${label[0].toUpperCase()}$_separator";
 
     if (color != null)
-      string += "color:0x$_hex24BitColorString$_markerSeparator";
+      string += "color:${toHex24BitColorString(color)}$_separator";
 
     if (locations.isNotEmpty) string += _markerLocationsString;
 

@@ -1,7 +1,5 @@
 part of google_static_maps_controller;
 
-const _markerSeparator = "|";
-
 abstract class Marker {
   final List<Location> locations;
 
@@ -39,11 +37,11 @@ abstract class Marker {
       string += "${location.latitude}, ${location.longitude}";
 
       if (i + 1 < locations.length) {
-        string += _markerSeparator;
+        string += _separator;
       }
     }
     return string;
   }
 
-  String toUrlEncodedString();
+  String toUrlString();
 }

@@ -81,7 +81,7 @@ The package provides simple access to the Google Static Maps service.
 | Image sizes                         |    ✅    |
 | Map types                           |    ✅    |
 | Markers                             |    ✅    |
-| Map styles                          |   ⚙️ ❌   |
+| Map styles                          |    ✅    |
 | Paths                               |    ❌    |
 | Encoded Polylines                   |    ❌    |
 | Viewports                           |    ❌    |

@@ -1,5 +1,7 @@
 part of google_static_maps_controller;
 
+const _separator = "|";
+
 MapScale getScaleForDevicePixelRatio(double devicePixelRatio) {
   assert(devicePixelRatio != null, "device pixel ratio cannot be null");
 
@@ -10,4 +12,11 @@ MapScale getScaleForDevicePixelRatio(double devicePixelRatio) {
   } else {
     return MapScale.scale4;
   }
+}
+
+String toHex24BitColorString(Color color) {
+  final hexColorString32Bit = color.value.toRadixString(16);
+  final hexColorString24Bit =
+      hexColorString32Bit.substring(2, hexColorString32Bit.length);
+  return "0x$hexColorString24Bit";
 }

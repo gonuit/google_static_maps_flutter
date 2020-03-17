@@ -28,6 +28,7 @@ void main() {
         "https://maps.googleapis.com/maps/api/staticmap?"
         "key=GOOGLE_API_KEY"
         "&size=200x300"
+        "&center=20.0%2C+30.0"
         "&language=PL"
         "&maptype=satellite"
         "&zoom=10"
@@ -107,7 +108,7 @@ void main() {
     );
 
     expect(
-      marker.toUrlEncodedString(),
+      marker.toUrlString(),
       equals(
         "anchor:top"
         "|icon:www.example.com/image"
@@ -125,7 +126,7 @@ void main() {
     );
 
     expect(
-      marker1.toUrlEncodedString(),
+      marker1.toUrlString(),
       equals(
         "anchor:64, 0"
         "|icon:www.example.com/image"

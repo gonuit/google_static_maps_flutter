@@ -12,8 +12,13 @@ part './src/utils/utils.dart';
 part './src/controller.dart';
 
 /// markers
-part './src/data/markers/marker.dart';
-part './src/data/markers/custom_marker.dart';
-part './src/data/markers/default_marker.dart';
+part './src/markers/marker.dart';
+part './src/markers/custom_marker.dart';
+part './src/markers/default_marker.dart';
+part './src/markers/marker_anchor.dart';
 
-part './src/data/markers/marker_anchor.dart';
+/// style
+part './src/style/map_style.dart';
+part './src/style/data/style_element.dart';
+part './src/style/data/style_feature.dart';
+part './src/style/data/visibility_rule.dart';
