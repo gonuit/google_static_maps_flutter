@@ -166,8 +166,8 @@ class MapStyle {
 
   String toUrlString() {
     String url = "";
-    if (feature != null) url += "${feature.value}$_separator";
-    if (element != null) url += "${element.value}$_separator";
+    if (feature != null) url += "feature:${feature.value}$_separator";
+    if (element != null) url += "element:${element.value}$_separator";
     url += _rulesUrlString();
     return url;
   }

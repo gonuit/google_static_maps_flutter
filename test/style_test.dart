@@ -22,6 +22,7 @@ void main() {
             ],
           ),
           MapStyle(
+            feature: StyleFeature.poi.government,
             element: StyleElement.geometry.fill,
             rules: [
               StyleRule.visibility(VisibilityRule.simplified),
@@ -36,12 +37,13 @@ void main() {
         "?key=GOOGLE_API_KEY"
         "&size=200x300"
         "&zoom=5"
-        "&style=geometry"
+        "&style=element%3Ageometry"
         "%7Ccolor%3A0xf44336"
         "%7Clightness%3A20"
         "%7Csaturation%3A-20"
         "%7Cvisibility%3Aon"
-        "&style=geometry.fill"
+        "&style=feature%3Apoi.government"
+        "%7Celement%3Ageometry.fill"
         "%7Cvisibility%3Asimplified"
         "%7Ccolor%3A0x4caf50",
       ),

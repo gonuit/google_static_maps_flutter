@@ -4,111 +4,111 @@ class _StyleAdministrative extends StyleFeature {
   const _StyleAdministrative() : super._("administrative");
 
   /// Selects countries.
-  static const country = StyleFeature._("administrative.country");
+  final country = const StyleFeature._("administrative.country");
 
   /// Selects land parcels.
-  static const landParcel = StyleFeature._("administrative.land_parcel");
+  final landParcel = const StyleFeature._("administrative.land_parcel");
 
   /// Selects localities.
-  static const locality = StyleFeature._("administrative.locality");
+  final locality = const StyleFeature._("administrative.locality");
 
   /// Selects neighborhoods.
-  static const neighborhood = StyleFeature._("administrative.neighborhood");
+  final neighborhood = const StyleFeature._("administrative.neighborhood");
 
   /// Selects provinces.
-  static const province = StyleFeature._("administrative.province");
+  final province = const StyleFeature._("administrative.province");
 }
 
 class _StyleLandscapeNatural extends StyleFeature {
   const _StyleLandscapeNatural() : super._("landscape.natural");
 
   /// Selects land cover features, the physical material that covers the earth's surface, such as forests, grasslands, wetlands, and bare ground.
-  static const landcover = StyleFeature._("landscape.natural.landcover");
+  final landcover = const StyleFeature._("landscape.natural.landcover");
 
   /// Selects terrain features of a land surface, such as elevation, slope, and orientation.
-  static const terrain = StyleFeature._("landscape.natural.terrain");
+  final terrain = const StyleFeature._("landscape.natural.terrain");
 }
 
 class _StyleLandscape extends StyleFeature {
   const _StyleLandscape() : super._("landscape");
 
   /// Selects man-made features, such as buildings and other structures.
-  static const manMade = StyleFeature._("landscape.man_made");
+  final manMade = const StyleFeature._("landscape.man_made");
 
   /// Selects natural features, such as mountains, rivers, deserts, and glaciers.
-  static const natural = _StyleLandscapeNatural();
+  final natural = const _StyleLandscapeNatural();
 }
 
 class _StylePoi extends StyleFeature {
   const _StylePoi() : super._("poi");
 
   /// Selects tourist attractions.
-  static const attraction = StyleFeature._("poi.attraction");
+  final attraction = const StyleFeature._("poi.attraction");
 
   /// Selects businesses.
-  static const business = StyleFeature._("poi.business");
+  final business = const StyleFeature._("poi.business");
 
   /// Selects government buildings.
-  static const government = StyleFeature._("poi.government");
+  final government = const StyleFeature._("poi.government");
 
   /// Selects emergency services, including hospitals, pharmacies, police, doctors, and others.
-  static const medical = StyleFeature._("poi.medical");
+  final medical = const StyleFeature._("poi.medical");
 
   /// Selects parks.
-  static const park = StyleFeature._("poi.park");
+  final park = const StyleFeature._("poi.park");
 
   /// Selects places of worship, including churches, temples, mosques, and others.
-  static const placeOfWorship = StyleFeature._("poi.place_of_worship");
+  final placeOfWorship = const StyleFeature._("poi.place_of_worship");
 
   /// Selects schools.
-  static const school = StyleFeature._("poi.school");
+  final school = const StyleFeature._("poi.school");
 
   /// Selects sports complexes.
-  static const sportsComplex = StyleFeature._("poi.sports_complex");
+  final sportsComplex = const StyleFeature._("poi.sports_complex");
 }
 
 class _StyleRoadHighway extends StyleFeature {
   const _StyleRoadHighway() : super._("road.highway");
 
   /// Selects highways with controlled access.
-  static const controlledAccess =
-      StyleFeature._("landscape.natural.controlled_access");
+  final controlledAccess =
+      const StyleFeature._("landscape.natural.controlled_access");
 }
 
 class _StyleRoad extends StyleFeature {
   const _StyleRoad() : super._("road");
 
   /// Selects arterial roads.
-  static const arterial = StyleFeature._("road.arterial");
+  final arterial = const StyleFeature._("road.arterial");
 
   /// Selects highways.
-  static const highway = _StyleRoadHighway();
+  final highway = const _StyleRoadHighway();
 
   /// Selects local roads.
-  static const local = StyleFeature._("road.local");
+  final local = const StyleFeature._("road.local");
 }
 
 class _StyleTransitStation extends StyleFeature {
   const _StyleTransitStation() : super._("transit.station");
 
   /// Selects airports.
-  static const airport = StyleFeature._("transit.station.airport");
+  final airport = const StyleFeature._("transit.station.airport");
 
   /// Selects bus stops.
-  static const bus = StyleFeature._("transit.station.bus");
+  final bus = const StyleFeature._("transit.station.bus");
 
   /// Selects rail stations.
-  static const rail = StyleFeature._("transit.station.rail");
+  final rail = const StyleFeature._("transit.station.rail");
 }
 
 class _StyleTransit extends StyleFeature {
   const _StyleTransit() : super._("transit");
 
   /// Selects transit lines.
-  static const line = StyleFeature._("transit.line");
+  final line = const StyleFeature._("transit.line");
 
   /// Selects all transit stations.
-  static const station = _StyleTransitStation();
+  final station = const _StyleTransitStation();
 }
 
 class StyleFeature {
