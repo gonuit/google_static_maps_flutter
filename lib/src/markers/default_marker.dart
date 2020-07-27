@@ -27,8 +27,7 @@ class DefaultMarker extends Marker {
 
     if (label != null) string += "label:${label[0].toUpperCase()}$_separator";
 
-    if (color != null)
-      string += "color:${color.to24BitHexString()}$_separator";
+    if (color != null) string += "color:${color.to24BitHexString()}$_separator";
 
     if (locations.isNotEmpty) string += _markerLocationsString;
 
