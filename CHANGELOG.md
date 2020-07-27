@@ -1,3 +1,5 @@
+## [0.4.0] - 27.07.2020
+* Added support for paths (`Path` class)
 ## [0.3.0] - 17.03.2020
 * Added styles for maps
 ## [0.2.0] - 17.03.2020
