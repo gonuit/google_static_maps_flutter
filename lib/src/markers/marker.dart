@@ -1,6 +1,6 @@
 part of google_static_maps_controller;
 
-abstract class Marker {
+abstract class Marker implements MapPart {
   final List<Location> locations;
 
   const Marker._(this.locations)

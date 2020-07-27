@@ -1,6 +1,6 @@
 part of google_static_maps_controller;
 
-class StyleRule {
+class StyleRule implements MapPart {
   final String _key;
   final String _value;
 

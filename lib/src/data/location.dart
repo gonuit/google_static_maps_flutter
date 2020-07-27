@@ -1,6 +1,6 @@
 part of google_static_maps_controller;
 
-class Location {
+class Location implements MapPart {
   const Location(double latitude, double longitude)
       : assert(latitude != null),
         assert(longitude != null),
@@ -22,4 +22,10 @@ class Location {
       object.longitude == longitude;
 
   int get hashCode => hashValues(latitude, longitude);
+
+  @override
+  String toUrlString() {
+    // TODO: remove uneccessary space between lat nad lng, then update tests
+    return "$latitude, $longitude";
+  }
 }
