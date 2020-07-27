@@ -49,6 +49,5 @@ void main() {
         "%7Ccolor%3A0x4caf50",
       ),
     );
-    print(controller.url.toString());
   });
 }

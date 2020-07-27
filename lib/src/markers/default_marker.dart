@@ -16,9 +16,11 @@ class DefaultMarker extends Marker {
         ),
         super._(locations);
 
+  @override
   String toUrlString() {
-    String string = "";
     if (locations.isEmpty) return null;
+
+    String string = "";
 
     final markerSize = size.value;
     if (markerSize != null) string += "size:$markerSize$_separator";
@@ -26,7 +28,7 @@ class DefaultMarker extends Marker {
     if (label != null) string += "label:${label[0].toUpperCase()}$_separator";
 
     if (color != null)
-      string += "color:${toHex24BitColorString(color)}$_separator";
+      string += "color:${color.to24BitHexString()}$_separator";
 
     if (locations.isNotEmpty) string += _markerLocationsString;
 

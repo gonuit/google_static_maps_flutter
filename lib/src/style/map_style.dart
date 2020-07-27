@@ -11,7 +11,7 @@ class StyleRule implements MapPart {
           "hue argument cannot be null",
         ),
         _key = "hue",
-        _value = toHex24BitColorString(hue);
+        _value = hue.to24BitHexString();
 
   /// (a floating point value between -100 and 100) indicates the percentage
   /// change in brightness of the element. Negative values increase darkness
@@ -101,7 +101,7 @@ class StyleRule implements MapPart {
           "color argument cannot be null",
         ),
         _key = "color",
-        _value = toHex24BitColorString(color);
+        _value = color.to24BitHexString();
 
   /// (an integer value, greater than or equal to zero) sets the weight of the feature,
   /// in pixels. Setting the weight to a high value may result in clipping near tile borders.
@@ -119,7 +119,7 @@ class StyleRule implements MapPart {
   String toString() => "$runtimeType($_key, $_value)";
 }
 
-class MapStyle {
+class MapStyle implements MapPart {
   final StyleFeature feature;
   final StyleElement element;
 
@@ -149,19 +149,15 @@ class MapStyle {
         );
 
   String _rulesUrlString() {
-    String url = "";
+    final parts = List<String>(rules.length);
 
     for (int i = 0; i < rules.length; i++) {
       final rule = rules[i];
 
-      url += rule.toUrlString();
-
-      if (i + 1 < rules.length) {
-        url += _separator;
-      }
+      parts[i] = rule.toUrlString();
     }
 
-    return url;
+    return parts.join(_separator);
   }
 
   String toUrlString() {
