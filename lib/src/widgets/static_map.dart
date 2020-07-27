@@ -3,6 +3,7 @@ part of google_static_maps_controller;
 class StaticMap extends StatelessWidget {
   final List<Marker> markers;
   final List<MapStyle> styles;
+  final List<Path> paths;
 
   /// Defines the center of the map, equidistant from all edges of the map.
   final Location center;
@@ -74,6 +75,7 @@ class StaticMap extends StatelessWidget {
     this.scale,
     this.format,
     this.maptype,
+    this.paths,
     this.language,
     this.region,
     this.signature,
@@ -105,6 +107,7 @@ class StaticMap extends StatelessWidget {
             language: language,
             maptype: maptype,
             markers: markers,
+            paths: paths,
             region: region,
             signature: signature,
             zoom: zoom,

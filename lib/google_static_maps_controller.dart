@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 part './src/widgets/static_map.dart';
 part './src/data/enums.dart';
 part './src/data/location.dart';
+part './src/data/map_part.dart';
 
 part './src/utils/utils.dart';
 part './src/controller.dart';
@@ -22,3 +23,6 @@ part './src/style/map_style.dart';
 part './src/style/data/style_element.dart';
 part './src/style/data/style_feature.dart';
 part './src/style/data/visibility_rule.dart';
+
+/// paths
+part './src/paths/path.dart';

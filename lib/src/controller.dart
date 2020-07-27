@@ -6,6 +6,8 @@ class StaticMapController {
 
   final List<MapStyle> styles;
 
+  final List<Path> paths;
+
   /// Defines the center of the map, equidistant from all edges of the map.
   final Location center;
 
@@ -81,6 +83,9 @@ class StaticMapController {
         for (final marker in markers) marker.toUrlString()
       ];
 
+    if (paths != null)
+      params["path"] = <String>[for (final path in paths) path.toUrlString()];
+
     if (styles != null)
       params["style"] = <String>[
         for (final style in styles) style.toUrlString()
@@ -102,6 +107,7 @@ class StaticMapController {
     @required this.height,
     this.markers,
     this.styles,
+    this.paths,
     this.center,
     this.zoom,
     this.scale,
@@ -128,6 +134,7 @@ class StaticMapController {
     int width,
     int height,
     List<Marker> markers,
+    List<Path> paths,
     Location center,
     int zoom,
     MapScale scale,
@@ -143,6 +150,7 @@ class StaticMapController {
         width: width ?? this.width,
         height: height ?? this.height,
         markers: markers ?? this.markers,
+        paths: paths ?? this.paths,
         center: center ?? this.center,
         zoom: zoom ?? this.zoom,
         scale: scale ?? this.scale,
