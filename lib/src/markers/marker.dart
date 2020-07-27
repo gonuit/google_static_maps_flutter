@@ -1,6 +1,6 @@
 part of google_static_maps_controller;
 
-abstract class Marker {
+abstract class Marker implements MapPart {
   final List<Location> locations;
 
   const Marker._(this.locations)
@@ -30,18 +30,10 @@ abstract class Marker {
   }) = CustomMarker;
 
   String get _markerLocationsString {
-    String string = "";
+    List<String> parts = List<String>(locations.length);
     for (int i = 0; i < locations.length; i++) {
-      final location = locations[i];
-
-      string += "${location.latitude}, ${location.longitude}";
-
-      if (i + 1 < locations.length) {
-        string += _separator;
-      }
+      parts[i] = locations[i].toUrlString();
     }
-    return string;
+    return parts.join(_separator);
   }
-
-  String toUrlString();
 }

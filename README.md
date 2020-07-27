@@ -74,17 +74,17 @@ The package provides simple access to the Google Static Maps service.
   }
 ```
 
-| Feature                             |  Status  |
-| :---------------------------------- | :------: |
-| Base Static map support             |    ✅    |
-| Zoom levels                         |    ✅    |
-| Image sizes                         |    ✅    |
-| Map types                           |    ✅    |
-| Markers                             |    ✅    |
-| Map styles                          |    ✅    |
-| Paths                               |    ❌    |
-| Encoded Polylines                   |    ❌    |
-| Viewports                           |    ❌    |
+| Feature                 | Status |
+| :---------------------- | :----: |
+| Base Static map support |   ✅    |
+| Zoom levels             |   ✅    |
+| Image sizes             |   ✅    |
+| Map types               |   ✅    |
+| Markers                 |   ✅    |
+| Map styles              |   ✅    |
+| Paths                   |   ✅    |
+| Encoded Polylines       |   ❌    |
+| Viewports               |   ⚙️    |
 
 
 ✅ - done  
