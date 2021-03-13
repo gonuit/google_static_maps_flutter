@@ -17,12 +17,17 @@ class DefaultMarker extends Marker {
         super._(locations);
 
   @override
-  String? toUrlString() {
-    if (locations.isEmpty) return null;
+  String toUrlString() {
+    if (locations.isEmpty) {
+      throw StateError(
+        'Marker must contain at least one location. '
+        'Empty array was provided to "locations" argument.',
+      );
+    }
 
     String string = "";
 
-    final markerSize = size.value;
+    final markerSize = size?.value;
     if (markerSize != null) string += "size:$markerSize$_separator";
 
     if (label != null) string += "label:${label![0].toUpperCase()}$_separator";

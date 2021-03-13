@@ -3,11 +3,7 @@ part of google_static_maps_controller;
 abstract class Marker implements MapPart {
   final List<Location> locations;
 
-  const Marker._(this.locations)
-      : assert(
-          locations.length > 0,
-          "At least one location should be provided",
-        );
+  const Marker._(this.locations);
 
   /// Create default google maps style marker
   const factory Marker({

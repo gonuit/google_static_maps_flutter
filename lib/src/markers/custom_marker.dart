@@ -11,9 +11,15 @@ class CustomMarker extends Marker {
     this.anchor,
   }) : super._(locations);
 
-  String? toUrlString() {
+  String toUrlString() {
+    if (locations.isEmpty) {
+      throw StateError(
+        'Marker must contain at least one location. '
+        'Empty array was provided to "locations" argument.',
+      );
+    }
+
     String string = "";
-    if (locations.isEmpty) return null;
 
     if (anchor != null) string += "anchor:${anchor!.value}$_separator";
 
