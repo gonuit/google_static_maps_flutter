@@ -1,3 +1,5 @@
+## [0.4.3] - 13.03.2020
+* Added `mapId` argument.
 ## [0.4.1] - 27.07.2020
 * Added package license.
 ## [0.4.0] - 27.07.2020
