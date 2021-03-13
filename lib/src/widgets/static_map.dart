@@ -1,5 +1,6 @@
 part of google_static_maps_controller;
 
+/// Widget for displaying static map. It uses `Image.network` widget. 
 class StaticMap extends StatelessWidget {
   final List<Marker>? markers;
   final List<MapStyle>? styles;
@@ -96,10 +97,14 @@ class StaticMap extends StatelessWidget {
       width: width,
       child: LayoutBuilder(
         builder: (context, constraints) {
+          final pixelRatio = MediaQuery.of(context).devicePixelRatio;
+          final width = constraints.maxWidth;
+          final height = constraints.maxHeight;
+
           final mapController = StaticMapController(
             scale: scale,
-            width: constraints.maxWidth.floor(),
-            height: constraints.maxHeight.floor(),
+            width: (width * pixelRatio).ceil(),
+            height: (height * pixelRatio).ceil(),
             googleApiKey: googleApiKey,
             center: center,
             format: format,
@@ -115,8 +120,8 @@ class StaticMap extends StatelessWidget {
 
           return Image.network(
             mapController.url.toString(),
-            width: constraints.maxWidth,
-            height: constraints.maxHeight,
+            width: width,
+            height: height,
             fit: BoxFit.contain,
           );
         },
