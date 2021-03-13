@@ -41,7 +41,7 @@ class Path implements MapPart {
 
   @override
   String toUrlString() {
-    if (points.length >= 2) {
+    if (points.length < 2) {
       throw StateError(
         'In order to draw a path, the path '
         'class must also be passed two or more points. points.length=${points.length}',

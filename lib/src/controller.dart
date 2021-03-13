@@ -73,23 +73,22 @@ class StaticMapController {
     if (center != null)
       params["center"] = "${center!.latitude}, ${center!.longitude}";
     if (language != null) params["language"] = language;
-    if (maptype.value != null) params["maptype"] = maptype.value;
-    if (zoom != null) params["zoom"] = zoom.toString();
-    if (format != null) params["format"] = format.value;
-    if (scale != null) params["scale"] = scale.value;
+    if (maptype != null) params["maptype"] = maptype!.value;
+    if (zoom != null) params["zoom"] = zoom!.toString();
+    if (format != null) params["format"] = format!.value;
+    if (scale != null) params["scale"] = scale!.value;
     if (region != null) params["region"] = region;
-    if (markers != null)
-      params["markers"] = <String?>[
-        for (final marker in markers!) marker.toUrlString()
-      ];
 
-    if (paths != null)
-      params["path"] = <String?>[for (final path in paths!) path.toUrlString()];
-
-    if (styles != null)
-      params["style"] = <String>[
-        for (final style in styles!) style.toUrlString()
-      ];
+    String urlEncodeMapPart(MapPart part) => part.toUrlString();
+    if (markers != null) {
+      params["markers"] = markers!.map(urlEncodeMapPart);
+    }
+    if (paths != null) {
+      params["path"] = paths!.map(urlEncodeMapPart);
+    }
+    if (styles != null) {
+      params["style"] = styles!.map(urlEncodeMapPart);
+    }
 
     return params;
   }

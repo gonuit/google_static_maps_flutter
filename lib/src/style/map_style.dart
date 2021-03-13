@@ -127,10 +127,7 @@ class MapStyle implements MapPart {
     this.element,
     this.feature,
     required this.rules,
-  }) : assert(
-          rules.length > 0,
-          "rules must contain at least one StyleRule",
-        );
+  });
 
   String _rulesUrlString() {
     final parts = List<String>.generate(
