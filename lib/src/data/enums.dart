@@ -8,8 +8,8 @@ enum MapImageFormat {
   jpgBaseline,
 }
 
-extension MapImageFormatExtension on MapImageFormat? {
-  String? get value {
+extension MapImageFormatExtension on MapImageFormat {
+  String get value {
     switch (this) {
       case MapImageFormat.gif:
         return "gif";
@@ -21,8 +21,6 @@ extension MapImageFormatExtension on MapImageFormat? {
         return "png8";
       case MapImageFormat.png32:
         return "png32";
-      default:
-        return null;
     }
   }
 }
@@ -34,8 +32,8 @@ enum StaticMapType {
   hybrid,
 }
 
-extension StaticMapTypeExtension on StaticMapType? {
-  String? get value {
+extension StaticMapTypeExtension on StaticMapType {
+  String get value {
     switch (this) {
       case StaticMapType.roadmap:
         return "roadmap";
@@ -45,8 +43,6 @@ extension StaticMapTypeExtension on StaticMapType? {
         return "hybrid";
       case StaticMapType.terrain:
         return "terrain";
-      default:
-        return null;
     }
   }
 }
@@ -57,8 +53,8 @@ enum MarkerSize {
   small,
 }
 
-extension MarkerSizeExtension on MarkerSize? {
-  String? get value {
+extension MarkerSizeExtension on MarkerSize {
+  String get value {
     switch (this) {
       case MarkerSize.tiny:
         return "tiny";
@@ -66,8 +62,6 @@ extension MarkerSizeExtension on MarkerSize? {
         return "small";
       case MarkerSize.mid:
         return "mid";
-      default:
-        return null;
     }
   }
 }
@@ -78,8 +72,8 @@ enum MapScale {
   scale4,
 }
 
-extension MapScaleExtension on MapScale? {
-  String? get value {
+extension MapScaleExtension on MapScale {
+  String get value {
     switch (this) {
       case MapScale.scale1:
         return "1";
@@ -87,8 +81,6 @@ extension MapScaleExtension on MapScale? {
         return "2";
       case MapScale.scale4:
         return "4";
-      default:
-        return null;
     }
   }
 }
