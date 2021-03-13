@@ -100,6 +100,9 @@ class StaticMapController {
         queryParameters: _getQueryParameters,
       );
 
+  /// Returns [ImageProvider] with current map.
+  ImageProvider get image => NetworkImage(url.toString());
+
   const StaticMapController({
     required this.googleApiKey,
     required this.width,
@@ -134,7 +137,6 @@ class StaticMapController {
     String? language,
     String? region,
     String? signature,
-    double? devicePixelRatio,
   }) =>
       StaticMapController(
         googleApiKey: googleApiKey ?? this.googleApiKey,
