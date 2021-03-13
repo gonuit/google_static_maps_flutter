@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_static_maps_controller/google_static_maps_controller.dart';
 
@@ -10,18 +11,18 @@ void main() {
 
   test("Build link correctly", () {
     const controller = StaticMapController(
-      googleApiKey: _mockGoogleApiKey,
-      height: 300,
-      width: 200,
-      center: const Location(20, 30),
-      zoom: 10,
-      format: MapImageFormat.gif,
-      language: "PL",
-      scale: MapScale.scale2,
-      maptype: StaticMapType.satellite,
-      region: "PL",
-      signature: "APP",
-    );
+        googleApiKey: _mockGoogleApiKey,
+        height: 300,
+        width: 200,
+        center: const Location(20, 30),
+        zoom: 10,
+        format: MapImageFormat.gif,
+        language: "PL",
+        scale: MapScale.scale2,
+        maptype: StaticMapType.satellite,
+        region: "PL",
+        signature: "APP",
+        mapId: 'mockedID');
     expect(
       controller.url.toString(),
       equals(
@@ -34,7 +35,8 @@ void main() {
         "&zoom=10"
         "&format=gif"
         "&scale=2"
-        "&region=PL",
+        "&region=PL"
+        "&map_id=mockedID",
       ),
     );
   });
@@ -159,6 +161,32 @@ void main() {
         "%7C20.0%2C+10.0"
         "%7C20.0%2C+20.0",
       ),
+    );
+  });
+
+  test(
+      "Throws exception when mapId argument is "
+      "provided together with styles.", () {
+    expect(
+      () => StaticMapController(
+        googleApiKey: _mockGoogleApiKey,
+        height: 200,
+        width: 200,
+        center: Location(-3.1467579, -59.8753814),
+        zoom: 10,
+        mapId: 'mockedID',
+        styles: [
+          MapStyle(
+            feature: StyleFeature.poi.government,
+            element: StyleElement.geometry.fill,
+            rules: [
+              StyleRule.visibility(VisibilityRule.simplified),
+              StyleRule.color(Colors.green),
+            ],
+          ),
+        ],
+      ),
+      throwsA(isA<AssertionError>()),
     );
   });
 }

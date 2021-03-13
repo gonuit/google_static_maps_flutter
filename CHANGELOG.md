@@ -1,7 +1,8 @@
 ## 0.5.0-nullsafety.1
 * Added support for null stafety.
 * `Path` and `Marker` will now throw errors when `toUrlString` is called and minimum required elements are not provided. 
-
+## 0.4.3
+* Added `mapId` argument.
 ## 0.4.1
 * Added package license.
 ## 0.4.0

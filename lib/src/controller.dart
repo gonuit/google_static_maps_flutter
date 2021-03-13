@@ -2,6 +2,12 @@ part of google_static_maps_controller;
 
 /// controls static map
 class StaticMapController {
+  /// A Map ID is a unique identifier that represents a single instance of
+  /// a Google Map. You can create Map IDs and update a style associated with
+  /// a Map ID at any time in the Google Cloud Console without changing
+  /// embedded JSON styling in your application code.
+  final String? mapId;
+
   final List<Marker>? markers;
 
   final List<MapStyle>? styles;
@@ -86,7 +92,15 @@ class StaticMapController {
     if (paths != null) {
       params["path"] = paths!.map(urlEncodeMapPart);
     }
-    if (styles != null) {
+
+    if (mapId != null && styles != null) {
+      throw StateError(
+          "styles argument cannot be provided when mapId is present.");
+    }
+
+    if (mapId != null) {
+      params["map_id"] = mapId;
+    } else if (styles != null) {
       params["style"] = styles!.map(urlEncodeMapPart);
     }
 
@@ -107,6 +121,7 @@ class StaticMapController {
     required this.googleApiKey,
     required this.width,
     required this.height,
+    this.mapId,
     this.markers,
     this.styles,
     this.paths,
@@ -118,9 +133,13 @@ class StaticMapController {
     this.language,
     this.region,
     this.signature,
-  }) : assert(
+  })  : assert(
           (center != null && zoom != null) || markers != null,
           "center and zoom should be provided when markers are not",
+        ),
+        assert(
+          !(styles != null && mapId != null),
+          "mapId cannot be provided together with styles argument.",
         );
 
   StaticMapController copyWith({

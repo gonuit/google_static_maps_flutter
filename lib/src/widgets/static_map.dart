@@ -2,6 +2,7 @@ part of google_static_maps_controller;
 
 /// Widget for displaying static map. It uses `Image.network` widget. 
 class StaticMap extends StatelessWidget {
+  final String? mapId;
   final List<Marker>? markers;
   final List<MapStyle>? styles;
   final List<Path>? paths;
@@ -76,6 +77,7 @@ class StaticMap extends StatelessWidget {
     this.scale,
     this.format,
     this.maptype,
+    this.mapId,
     this.paths,
     this.language,
     this.region,
@@ -116,6 +118,7 @@ class StaticMap extends StatelessWidget {
             signature: signature,
             zoom: zoom,
             styles: styles,
+            mapId: mapId,
           );
 
           return Image.network(
