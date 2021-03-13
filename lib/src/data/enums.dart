@@ -8,8 +8,8 @@ enum MapImageFormat {
   jpgBaseline,
 }
 
-extension MapImageFormatExtension on MapImageFormat {
-  String get value {
+extension MapImageFormatExtension on MapImageFormat? {
+  String? get value {
     switch (this) {
       case MapImageFormat.gif:
         return "gif";
@@ -34,8 +34,8 @@ enum StaticMapType {
   hybrid,
 }
 
-extension StaticMapTypeExtension on StaticMapType {
-  String get value {
+extension StaticMapTypeExtension on StaticMapType? {
+  String? get value {
     switch (this) {
       case StaticMapType.roadmap:
         return "roadmap";
@@ -57,8 +57,8 @@ enum MarkerSize {
   small,
 }
 
-extension MarkerSizeExtension on MarkerSize {
-  String get value {
+extension MarkerSizeExtension on MarkerSize? {
+  String? get value {
     switch (this) {
       case MarkerSize.tiny:
         return "tiny";
@@ -78,8 +78,8 @@ enum MapScale {
   scale4,
 }
 
-extension MapScaleExtension on MapScale {
-  String get value {
+extension MapScaleExtension on MapScale? {
+  String? get value {
     switch (this) {
       case MapScale.scale1:
         return "1";

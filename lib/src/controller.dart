@@ -2,19 +2,19 @@ part of google_static_maps_controller;
 
 /// controls static map
 class StaticMapController {
-  final List<Marker> markers;
+  final List<Marker>? markers;
 
-  final List<MapStyle> styles;
+  final List<MapStyle>? styles;
 
-  final List<Path> paths;
+  final List<Path>? paths;
 
   /// Defines the center of the map, equidistant from all edges of the map.
-  final Location center;
+  final Location? center;
 
   /// defines the zoom level of the map, which determines the magnification
   /// level of the map. This parameter takes a numerical value corresponding
   /// to the zoom level of the region desired.
-  final int zoom;
+  final int? zoom;
 
   /// This parameter is affected by the scale parameter, the final output
   /// width is the product of the width and scale values
@@ -29,29 +29,29 @@ class StaticMapController {
   /// of detail (i.e. the contents of the map don't change). This is useful
   /// when developing for high-resolution displays, or when generating a map
   /// for printing. The default value is 1. Accepted values are 2 and 4.
-  final MapScale scale;
+  final MapScale? scale;
 
   /// defines the format of the resulting image. By default, the Maps Static
   /// API creates PNG images. There are several possible formats including
   /// GIF, JPEG and PNG types. Which format you use depends on how you intend
   /// to present the image. JPEG typically provides greater compression, while
   /// GIF and PNG provide greater detail.
-  final MapImageFormat format;
+  final MapImageFormat? format;
 
   /// Defines the type of map to construct. There are several possible maptype
   /// values, including roadmap, satellite, hybrid, and terrain.
-  final StaticMapType maptype;
+  final StaticMapType? maptype;
 
   /// Defines the language to use for display of labels on map tiles.
   /// Note that this parameter is only supported for some country tiles;
   /// if the specific language requested is not supported for the tile set,
   /// then the default language for that tileset will be used.
-  final String language;
+  final String? language;
 
   /// Defines the appropriate borders to display, based on geo-political
   /// sensitivities. Accepts a region code specified as a two-character
   /// ccTLD ('top-level domain') value
-  final String region;
+  final String? region;
 
   /// allows you to monitor your application's API usage in the Google Cloud
   /// Platform Console, and ensures that Google can contact you about your
@@ -61,7 +61,7 @@ class StaticMapController {
   /// is a digital signature used to verify that any site generating requests
   /// using your API key is authorized to do so. Requests without a digital
   /// signature might fail
-  final String signature;
+  final String? signature;
 
   Map<String, dynamic> get _getQueryParameters {
     final params = <String, dynamic>{};
@@ -71,7 +71,7 @@ class StaticMapController {
 
     /// TODO: center could be string
     if (center != null)
-      params["center"] = "${center.latitude}, ${center.longitude}";
+      params["center"] = "${center!.latitude}, ${center!.longitude}";
     if (language != null) params["language"] = language;
     if (maptype.value != null) params["maptype"] = maptype.value;
     if (zoom != null) params["zoom"] = zoom.toString();
@@ -79,16 +79,16 @@ class StaticMapController {
     if (scale != null) params["scale"] = scale.value;
     if (region != null) params["region"] = region;
     if (markers != null)
-      params["markers"] = <String>[
-        for (final marker in markers) marker.toUrlString()
+      params["markers"] = <String?>[
+        for (final marker in markers!) marker.toUrlString()
       ];
 
     if (paths != null)
-      params["path"] = <String>[for (final path in paths) path.toUrlString()];
+      params["path"] = <String?>[for (final path in paths!) path.toUrlString()];
 
     if (styles != null)
       params["style"] = <String>[
-        for (final style in styles) style.toUrlString()
+        for (final style in styles!) style.toUrlString()
       ];
 
     return params;
@@ -102,9 +102,9 @@ class StaticMapController {
       );
 
   const StaticMapController({
-    @required this.googleApiKey,
-    @required this.width,
-    @required this.height,
+    required this.googleApiKey,
+    required this.width,
+    required this.height,
     this.markers,
     this.styles,
     this.paths,
@@ -116,34 +116,26 @@ class StaticMapController {
     this.language,
     this.region,
     this.signature,
-  })  : assert(
-          width != null && height != null,
-          "Map width and height should be provided",
-        ),
-        assert(
-          center != null && zoom != null || markers != null,
+  }) : assert(
+          (center != null && zoom != null) || markers != null,
           "center and zoom should be provided when markers are not",
-        ),
-        assert(
-          googleApiKey != null,
-          "Google api key should be provided and cannot be null",
         );
 
   StaticMapController copyWith({
-    String googleApiKey,
-    int width,
-    int height,
-    List<Marker> markers,
-    List<Path> paths,
-    Location center,
-    int zoom,
-    MapScale scale,
-    MapImageFormat format,
-    StaticMapType maptype,
-    String language,
-    String region,
-    String signature,
-    double devicePixelRatio,
+    String? googleApiKey,
+    int? width,
+    int? height,
+    List<Marker>? markers,
+    List<Path>? paths,
+    Location? center,
+    int? zoom,
+    MapScale? scale,
+    MapImageFormat? format,
+    StaticMapType? maptype,
+    String? language,
+    String? region,
+    String? signature,
+    double? devicePixelRatio,
   }) =>
       StaticMapController(
         googleApiKey: googleApiKey ?? this.googleApiKey,

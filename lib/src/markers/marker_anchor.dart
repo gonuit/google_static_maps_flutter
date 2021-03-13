@@ -4,12 +4,7 @@ class MarkerAnchor {
   final String value;
   const MarkerAnchor._predefined(this.value);
 
-  const MarkerAnchor(int x, int y)
-      : assert(
-          x != null && y != null,
-          "x and y cannot be null",
-        ),
-        value = "$x, $y";
+  const MarkerAnchor(int x, int y) : value = "$x, $y";
 
   static const top = MarkerAnchor._predefined("top");
   static const bottom = MarkerAnchor._predefined("bottom");

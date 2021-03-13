@@ -2,9 +2,7 @@ part of google_static_maps_controller;
 
 class Location implements MapPart {
   const Location(double latitude, double longitude)
-      : assert(latitude != null),
-        assert(longitude != null),
-        latitude =
+      : latitude =
             latitude < -90.0 ? -90.0 : (90.0 < latitude ? 90.0 : latitude),
         longitude = (longitude + 180.0) % 360.0 - 180.0;
 

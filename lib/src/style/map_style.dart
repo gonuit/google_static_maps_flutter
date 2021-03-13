@@ -2,15 +2,11 @@ part of google_static_maps_controller;
 
 class StyleRule implements MapPart {
   final String _key;
-  final String _value;
+  final String? _value;
 
   /// Indicates the basic color.
   StyleRule.hue(Color hue)
-      : assert(
-          hue != null,
-          "hue argument cannot be null",
-        ),
-        _key = "hue",
+      : _key = "hue",
         _value = hue.to24BitHexString();
 
   /// (a floating point value between -100 and 100) indicates the percentage
@@ -30,7 +26,7 @@ class StyleRule implements MapPart {
           "lightness argument must be in range -100 to 100",
         ),
         _key = "lightness",
-        _value = lightness?.toString();
+        _value = lightness.toString();
 
   /// (a floating point value between -100 and 100) indicates the percentage
   /// change in intensity of the basic color to apply to the element.
@@ -47,7 +43,7 @@ class StyleRule implements MapPart {
           "saturation argument must be in range -100 to 100",
         ),
         _key = "saturation",
-        _value = saturation?.toString();
+        _value = saturation.toString();
 
   /// (a floating point value between 0.01 and 10.0, where 1.0 applies no correction)
   /// indicates the amount of gamma correction to apply to the element. Gamma corrections
@@ -66,7 +62,7 @@ class StyleRule implements MapPart {
           "gamma argument must be in range 0.01 to 10.0",
         ),
         _key = "gamma",
-        _value = gamma?.toString();
+        _value = gamma.toString();
 
   /// (if true) inverts the existing lightness. This is useful, for example, for quickly
   /// switching to a darker map with white text.
@@ -75,43 +71,31 @@ class StyleRule implements MapPart {
   /// changes to the base map style, the changes affect your map's features styled with
   /// invert_lightness. It's better to use the absolute color styler if you can.
   StyleRule.invertLightness(bool invertLightness)
-      : assert(
-          invertLightness != null,
-          "invertLightness argument cannot be null",
-        ),
-        _key = "invert_lightness",
-        _value = invertLightness?.toString();
+      : _key = "invert_lightness",
+        _value = invertLightness.toString();
 
   /// indicates whether and how the element appears on the map. A simplified visibility
   /// removes some style features from the affected features; roads, for example, are
   /// simplified into thinner lines without outlines, while parks lose their label text
   /// but retain the label icon.
   StyleRule.visibility(VisibilityRule visibility)
-      : assert(
-          visibility != null,
-          "visibility argument cannot be null",
-        ),
-        _key = "visibility",
-        _value = visibility?.value;
+      : _key = "visibility",
+        _value = visibility.value;
 
   /// sets the color of the feature.
   StyleRule.color(Color color)
-      : assert(
-          color != null,
-          "color argument cannot be null",
-        ),
-        _key = "color",
+      : _key = "color",
         _value = color.to24BitHexString();
 
   /// (an integer value, greater than or equal to zero) sets the weight of the feature,
   /// in pixels. Setting the weight to a high value may result in clipping near tile borders.
   StyleRule.weight(int weight)
       : assert(
-          weight != null && weight >= 0,
+          weight >= 0,
           "weight argument should be greater than or equal to zero",
         ),
         _key = "weight",
-        _value = weight?.toString();
+        _value = weight.toString();
 
   String toUrlString() => "$_key:$_value";
 
@@ -120,8 +104,8 @@ class StyleRule implements MapPart {
 }
 
 class MapStyle implements MapPart {
-  final StyleFeature feature;
-  final StyleElement element;
+  final StyleFeature? feature;
+  final StyleElement? element;
 
   /// Style rules are applied in the order that you specify. Do not
   /// combine multiple operations into a single style operation.
@@ -142,28 +126,23 @@ class MapStyle implements MapPart {
   const MapStyle({
     this.element,
     this.feature,
-    @required this.rules,
+    required this.rules,
   }) : assert(
-          rules != null && rules.length > 0,
+          rules.length > 0,
           "rules must contain at least one StyleRule",
         );
 
   String _rulesUrlString() {
-    final parts = List<String>(rules.length);
-
-    for (int i = 0; i < rules.length; i++) {
-      final rule = rules[i];
-
-      parts[i] = rule.toUrlString();
-    }
+    final parts = List<String>.generate(
+        rules.length, (int index) => rules[index].toUrlString());
 
     return parts.join(_separator);
   }
 
   String toUrlString() {
     String url = "";
-    if (feature != null) url += "feature:${feature.value}$_separator";
-    if (element != null) url += "element:${element.value}$_separator";
+    if (feature != null) url += "feature:${feature!.value}$_separator";
+    if (element != null) url += "element:${element!.value}$_separator";
     url += _rulesUrlString();
     return url;
   }
