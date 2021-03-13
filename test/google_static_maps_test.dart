@@ -94,7 +94,7 @@ void main() {
       [9.01, MapScale.scale4],
     ])
       expect(
-        getScaleForDevicePixelRatio(value[0]),
+        getScaleForDevicePixelRatio(value[0] as double),
         equals(value[1]),
       );
   });

@@ -251,4 +251,28 @@ void main() {
       equals('10.0, 10.0|-10.0, 10.0'),
     );
   });
+
+  test(
+      "Throws error when path toUrlString method is called for "
+      "path with less than 2 points.", () {
+    Path path = Path(
+      points: <Location>[
+        Location(10, 10),
+      ],
+    );
+
+    expect(
+      () => path.toUrlString(),
+      throwsA(isA<StateError>()),
+    );
+
+    path = Path(
+      points: <Location>[],
+    );
+
+    expect(
+      () => path.toUrlString(),
+      throwsA(isA<StateError>()),
+    );
+  });
 }

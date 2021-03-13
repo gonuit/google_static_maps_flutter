@@ -21,8 +21,6 @@ extension MapImageFormatExtension on MapImageFormat {
         return "png8";
       case MapImageFormat.png32:
         return "png32";
-      default:
-        return null;
     }
   }
 }
@@ -45,8 +43,6 @@ extension StaticMapTypeExtension on StaticMapType {
         return "hybrid";
       case StaticMapType.terrain:
         return "terrain";
-      default:
-        return null;
     }
   }
 }
@@ -66,8 +62,6 @@ extension MarkerSizeExtension on MarkerSize {
         return "small";
       case MarkerSize.mid:
         return "mid";
-      default:
-        return null;
     }
   }
 }
@@ -87,8 +81,6 @@ extension MapScaleExtension on MapScale {
         return "2";
       case MapScale.scale4:
         return "4";
-      default:
-        return null;
     }
   }
 }

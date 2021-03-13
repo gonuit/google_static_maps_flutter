@@ -3,8 +3,6 @@ part of google_static_maps_controller;
 const _separator = "|";
 
 MapScale getScaleForDevicePixelRatio(double devicePixelRatio) {
-  assert(devicePixelRatio != null, "device pixel ratio cannot be null");
-
   if (devicePixelRatio <= 1) {
     return MapScale.scale1;
   } else if (devicePixelRatio <= 2) {
