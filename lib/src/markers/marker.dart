@@ -25,7 +25,6 @@ abstract class Marker implements MapPart {
       locations.length,
       (int index) => locations[index].toUrlString(),
     );
-
     return parts.join(_separator);
   }
 }

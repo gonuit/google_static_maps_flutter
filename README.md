@@ -1,7 +1,28 @@
 # google_static_maps_controller
 [![Codemagic build status](https://api.codemagic.io/apps/5e70ce446e13eb493ea3b675/5e70ce446e13eb493ea3b674/status_badge.svg)](https://codemagic.io/apps/5e70ce446e13eb493ea3b675/5e70ce446e13eb493ea3b674/latest_build)
 
-The package provides simple access to the Google Static Maps service.
+The package provides simple and declarative access to the Google Static Maps service.
+
+| Feature                 | Status |
+| :---------------------- | :----: |
+| Base Static map support |   ✅    |
+| Zoom levels             |   ✅    |
+| Image sizes             |   ✅    |
+| Map types               |   ✅    |
+| Markers                 |   ✅    |
+| Map styles              |   ✅    |
+| Paths                   |   ✅    |
+| Encoded Polylines       |   ❌    |
+| Viewports               |   ⚙️    |
+
+
+✅ - done  
+🧪 - experimental  
+⚙️  - work in progress  
+❌ - not yet implemented 
+
+## Example:
+![map_screenshot](./readme/screen.png)
 
 ## Getting Started
 
@@ -60,37 +81,17 @@ The package provides simple access to the Google Static Maps service.
       center: Location(-3.1178833, -60.0029284),
     );
 
-    /// Get URL of the declared static map
-    String mapImageUrl = _controller.url.toString();
+    /// Get map image provider from controller.
+    /// You can also get image url by accessing
+    /// `_controller.url` property.
+    ImageProvider image = _controller.image;
 
     return Scaffold(
       body: Center(
         /// Display as a normal network image
-        child: Image.network(
-          mapImageUrl,
-        ),
+        child: Image(image: image),
       ),
     );
   }
 ```
 
-| Feature                 | Status |
-| :---------------------- | :----: |
-| Base Static map support |   ✅    |
-| Zoom levels             |   ✅    |
-| Image sizes             |   ✅    |
-| Map types               |   ✅    |
-| Markers                 |   ✅    |
-| Map styles              |   ✅    |
-| Paths                   |   ✅    |
-| Encoded Polylines       |   ❌    |
-| Viewports               |   ⚙️    |
-
-
-✅ - done  
-🧪 - experimental  
-⚙️  - work in progress  
-❌ - not yet implemented 
-
-## Example:
-![map_screenshot](./readme/screen.png)
