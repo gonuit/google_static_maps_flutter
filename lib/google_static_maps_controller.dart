@@ -1,7 +1,7 @@
 library google_static_maps_controller;
 
 import 'dart:ui';
-
+import 'dart:math';
 import 'package:flutter/widgets.dart';
 
 part './src/widgets/static_map.dart';
