@@ -26,11 +26,21 @@ class Path implements MapPart {
   /// line in screen space. Defaults to false.
   final bool? geodesic;
 
+  /// (optional) Circle radius in meters.
+  ///
+  /// In order to render a circle, make sure to provide only one
+  /// path point.
+  ///
+  /// This is not a part of the official google static maps API,
+  /// but a useful addition that simplifies drawing circles.
   final int? radius;
 
   /// In order to draw a path, the path class must also be passed
   /// two or more points. The Maps Static API will then connect the
   /// path along those points, in the specified order.
+  ///
+  /// This library also accepts a single point and [radius] parameter
+  /// to draw circles.
   final List<Location> points;
 
   const Path({
@@ -76,8 +86,12 @@ class Path implements MapPart {
     return parts.join(_separator);
   }
 
-  String _drawCirclePath(double latitude, double longitude, int radius,
-      {int detail = 8}) {
+  String _drawCirclePath(
+    double latitude,
+    double longitude,
+    int radius, {
+    int detail = 8,
+  }) {
     int R = 6371;
 
     double lat = (latitude * pi) / 180;
@@ -86,7 +100,7 @@ class Path implements MapPart {
 
     int i = 0;
 
-    String value = "";
+    final value = StringBuffer();
 
     for (i = 0; i <= 360; i += detail) {
       double brng = (i * pi) / 180;
@@ -100,11 +114,11 @@ class Path implements MapPart {
       plat = (plat * 180) / pi;
 
       if (value.isNotEmpty) {
-        value += "|";
+        value.write(_separator);
       }
-      value += plat.toString() + "," + plng.toString();
+      value.write("$plat,$plng");
     }
 
-    return value;
+    return value.toString();
   }
 }

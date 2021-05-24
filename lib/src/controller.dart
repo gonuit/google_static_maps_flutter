@@ -24,10 +24,20 @@ class StaticMapController {
 
   /// This parameter is affected by the scale parameter, the final output
   /// width is the product of the width and scale values
+  ///
+  /// Static Maps images can be returned in any size up to 640 x 640 pixels.
+  /// Google Maps Platform Premium Plan customers, who are correctly
+  /// authenticating requests to the Maps Static API, can request images
+  /// up to 2048 x 2048 pixels.
   final int width;
 
   /// This parameter is affected by the scale parameter, the final output
   /// height is the product of the height and scale values
+  ///
+  /// Static Maps images can be returned in any size up to 640 x 640 pixels.
+  /// Google Maps Platform Premium Plan customers, who are correctly
+  /// authenticating requests to the Maps Static API, can request images
+  /// up to 2048 x 2048 pixels.
   final int height;
 
   /// Affects the number of pixels that are returned. scale=2 returns twice as
