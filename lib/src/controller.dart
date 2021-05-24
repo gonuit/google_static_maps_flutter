@@ -79,7 +79,7 @@ class StaticMapController {
   /// signature might fail
   final String? signature;
 
-  Map<String, dynamic> get _getQueryParameters {
+  Map<String, dynamic> get _queryParameters {
     final params = <String, dynamic>{};
 
     params["key"] = googleApiKey;
@@ -117,12 +117,30 @@ class StaticMapController {
     return params;
   }
 
-  Uri get url => Uri(
-        scheme: "https",
-        host: "maps.googleapis.com",
-        path: "/maps/api/staticmap",
-        queryParameters: _getQueryParameters,
-      );
+  Uri get url {
+    final url = Uri(
+      scheme: "https",
+      host: "maps.googleapis.com",
+      path: "/maps/api/staticmap",
+      queryParameters: _queryParameters,
+    );
+
+    final urlSize = url.toString().length;
+
+    if (urlSize > maxGoogleStaticMapsUrlSize) {
+      String errorMessage = 'Too large url. '
+          'Maps Static API URLs are restricted '
+          'to 8192 characters in size.';
+
+      if (mapId == null && styles != null) {
+        errorMessage += "\nTIP: You can use \"mapId\" instead of \"styles\".";
+      }
+
+      throw StateError(errorMessage);
+    }
+
+    return url;
+  }
 
   /// Returns [ImageProvider] with current map.
   ImageProvider get image => NetworkImage(url.toString());
