@@ -1,3 +1,7 @@
+## 0.6.0
+* Added support for path circles.
+* Added additional check for max url size.
+* Documentation changes. 
 ## 0.5.0
 * Added support for null stafety.
 * `Path` and `Marker` will now throw errors when `toUrlString` is called and minimum required elements are not provided.
