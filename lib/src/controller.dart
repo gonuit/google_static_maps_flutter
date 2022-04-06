@@ -86,8 +86,7 @@ class StaticMapController {
     params["size"] = "${width}x$height";
 
     /// TODO: center could be string
-    if (center != null)
-      params["center"] = "${center!.latitude}, ${center!.longitude}";
+    if (center != null) params["center"] = center!.toUrlString();
     if (language != null) params["language"] = language;
     if (maptype != null) params["maptype"] = maptype!.value;
     if (zoom != null) params["zoom"] = zoom!.toString();

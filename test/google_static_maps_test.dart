@@ -27,7 +27,7 @@ void main() {
         "https://maps.googleapis.com/maps/api/staticmap?"
         "key=GOOGLE_API_KEY"
         "&size=200x300"
-        "&center=20.0%2C+30.0"
+        "&center=20.0%2C30.0"
         "&language=PL"
         "&maptype=satellite"
         "&zoom=10"
@@ -75,7 +75,7 @@ void main() {
         // marker styles
         "&markers=size%3Amid%7Clabel%3AA%7Ccolor%3A0xff0000"
         // marker locations
-        "%7C10.0%2C+20.0%7C20.0%2C+30.0%7C20.0%2C+30.0",
+        "%7C10.0%2C20.0%7C20.0%2C30.0%7C20.0%2C30.0",
       ),
     );
   });
@@ -112,8 +112,8 @@ void main() {
       equals(
         "anchor:top"
         "|icon:www.example.com/image"
-        "|20.0, 10.0"
-        "|20.0, 20.0",
+        "|20.0,10.0"
+        "|20.0,20.0",
       ),
     );
 
@@ -130,7 +130,7 @@ void main() {
       equals(
         "anchor:64, 0"
         "|icon:www.example.com/image"
-        "|20.0, 10.0",
+        "|20.0,10.0",
       ),
     );
   });
@@ -156,8 +156,8 @@ void main() {
         "&size=200x200"
         "&markers="
         "icon%3Awww.example.com%2Fimage"
-        "%7C20.0%2C+10.0"
-        "%7C20.0%2C+20.0",
+        "%7C20.0%2C10.0"
+        "%7C20.0%2C20.0",
       ),
     );
   });

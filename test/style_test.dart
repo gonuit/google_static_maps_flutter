@@ -36,7 +36,7 @@ void main() {
         "https://maps.googleapis.com/maps/api/staticmap"
         "?key=GOOGLE_API_KEY"
         "&size=200x300"
-        "&center=-3.1467579%2C+-59.87538140000001"
+        "&center=-3.1467579%2C-59.87538140000001"
         "&zoom=10"
         "&style=element%3Ageometry"
         "%7Chue%3A0xf44336"

@@ -76,13 +76,15 @@ class Path implements EncodableUrlPart {
     if (geodesic != null) parts.add("geodesic:$geodesic");
     if (fillColor != null)
       parts.add("fillcolor:${fillColor!.to32BitHexString()}");
-    if (radius != null)
+    if (radius != null) {
       parts.add(
-          "${_drawCirclePath(this.points.first.latitude, this.points.first.longitude, radius!)}");
-    else
+        "${_drawCirclePath(this.points.first.latitude, this.points.first.longitude, radius!)}",
+      );
+    } else {
       for (final location in points) {
         parts.add(location.toUrlString());
       }
+    }
     return parts.join(_separator);
   }
 

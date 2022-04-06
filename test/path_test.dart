@@ -42,10 +42,10 @@ void main() {
         "https://maps.googleapis.com/maps/api/staticmap"
         "?key=GOOGLE_API_KEY"
         "&size=200x300"
-        "&center=20.0%2C+30.0"
+        "&center=20.0%2C30.0"
         "&zoom=10"
-        "&path=weight%3A10%7Ccolor%3A0xF44336FF%7Cgeodesic%3Atrue%7Cfillcolor%3A0xFF0000AA%7C10.0%2C+10.0%7C10.0%2C+-10.0%7C-10.0%2C+-10.0%7C-10.0%2C+10.0"
-        "&path=10.0%2C+10.0%7C-10.0%2C+10.0",
+        "&path=weight%3A10%7Ccolor%3A0xF44336FF%7Cgeodesic%3Atrue%7Cfillcolor%3A0xFF0000AA%7C10.0%2C10.0%7C10.0%2C-10.0%7C-10.0%2C-10.0%7C-10.0%2C10.0"
+        "&path=10.0%2C10.0%7C-10.0%2C10.0",
       ),
     );
   });
@@ -61,7 +61,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('geodesic:true|10.0, 10.0|-10.0, 10.0'),
+      equals('geodesic:true|10.0,10.0|-10.0,10.0'),
     );
 
     path = Path(
@@ -74,7 +74,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('geodesic:false|10.0, 10.0|-10.0, 10.0'),
+      equals('geodesic:false|10.0,10.0|-10.0,10.0'),
     );
 
     path = Path(
@@ -86,7 +86,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('10.0, 10.0|-10.0, 10.0'),
+      equals('10.0,10.0|-10.0,10.0'),
     );
   });
 
@@ -101,7 +101,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('geodesic:true|10.0, 10.0|-10.0, 10.0'),
+      equals('geodesic:true|10.0,10.0|-10.0,10.0'),
     );
 
     path = Path(
@@ -114,7 +114,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('geodesic:false|10.0, 10.0|-10.0, 10.0'),
+      equals('geodesic:false|10.0,10.0|-10.0,10.0'),
     );
 
     path = Path(
@@ -126,7 +126,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('10.0, 10.0|-10.0, 10.0'),
+      equals('10.0,10.0|-10.0,10.0'),
     );
   });
 
@@ -141,7 +141,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('color:0xFF0000FF|10.0, 10.0|-10.0, 10.0'),
+      equals('color:0xFF0000FF|10.0,10.0|-10.0,10.0'),
     );
 
     path = Path(
@@ -154,7 +154,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('color:0xFF0000AA|10.0, 10.0|-10.0, 10.0'),
+      equals('color:0xFF0000AA|10.0,10.0|-10.0,10.0'),
     );
 
     path = Path(
@@ -166,7 +166,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('10.0, 10.0|-10.0, 10.0'),
+      equals('10.0,10.0|-10.0,10.0'),
     );
   });
 
@@ -181,7 +181,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('fillcolor:0xFF0000FF|10.0, 10.0|-10.0, 10.0'),
+      equals('fillcolor:0xFF0000FF|10.0,10.0|-10.0,10.0'),
     );
 
     path = Path(
@@ -194,7 +194,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('fillcolor:0xFF0000AA|10.0, 10.0|-10.0, 10.0'),
+      equals('fillcolor:0xFF0000AA|10.0,10.0|-10.0,10.0'),
     );
 
     path = Path(
@@ -206,7 +206,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('10.0, 10.0|-10.0, 10.0'),
+      equals('10.0,10.0|-10.0,10.0'),
     );
   });
 
@@ -221,7 +221,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('weight:2|10.0, 10.0|-10.0, 10.0'),
+      equals('weight:2|10.0,10.0|-10.0,10.0'),
     );
 
     path = Path(
@@ -234,7 +234,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('weight:4|10.0, 10.0|-10.0, 10.0'),
+      equals('weight:4|10.0,10.0|-10.0,10.0'),
     );
 
     path = Path(
@@ -246,7 +246,7 @@ void main() {
 
     expect(
       path.toUrlString(),
-      equals('10.0, 10.0|-10.0, 10.0'),
+      equals('10.0,10.0|-10.0,10.0'),
     );
   });
 
