@@ -12,7 +12,7 @@ The package provides simple and declarative access to the Google Static Maps ser
 | Markers                 |   ✅    |
 | Map styles              |   ✅    |
 | Paths                   |   ✅    |
-| Encoded Polylines       |   ❌    |
+| Encoded Polylines       |   ✅    |
 | Viewports               |   ⚙️    |
 
 
@@ -41,14 +41,12 @@ The package provides simple and declarative access to the Google Static Maps ser
           scaleToDevicePixelRatio: true,
           googleApiKey: "<GOOGLE_API_KEY>",
           paths: <Path>[
-            Path(
-              weight: 2,
+            Path.circle(
+              center: Location(-3.265628, -59.994832),
               radius: 5000, // meters
+              weight: 2,
               color: Colors.blue,
               fillColor: Colors.red.withOpacity(0.5),
-              points: <Location>[
-                Location(-3.265628, -59.994832),
-              ],
             ),
             Path(
               weight: 2,
