@@ -249,6 +249,37 @@ void main() {
       equals('10.0,10.0|-10.0,10.0'),
     );
   });
+  test("Encoded property works correctly.", () {
+    final notEncodedPath = Path(
+      weight: 2,
+      encoded: false,
+      points: <Location>[
+        Location(38.5, -120.2),
+        Location(40.7, -120.95),
+        Location(43.252, -126.453),
+      ],
+    );
+
+    expect(
+      notEncodedPath.toUrlString(),
+      equals('weight:2|38.5,-120.2|40.7,-120.95|43.252,-126.453'),
+    );
+
+    final encodedPath = Path(
+      weight: 2,
+      encoded: true,
+      points: <Location>[
+        Location(38.5, -120.2),
+        Location(40.7, -120.95),
+        Location(43.252, -126.453),
+      ],
+    );
+
+    expect(
+      encodedPath.toUrlString(),
+      equals('weight:2|enc:_p~iF~ps|U_ulLnnqC_mqNvxq`@'),
+    );
+  });
 
   test(
       "Throws error when path toUrlString method is called for "
