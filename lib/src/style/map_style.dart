@@ -1,6 +1,6 @@
 part of google_static_maps_controller;
 
-class StyleRule implements MapPart {
+class StyleRule implements EncodableUrlPart {
   final String _key;
   final String? _value;
 
@@ -103,7 +103,7 @@ class StyleRule implements MapPart {
   String toString() => "$runtimeType($_key, $_value)";
 }
 
-class MapStyle implements MapPart {
+class MapStyle implements EncodableUrlPart {
   final StyleFeature? feature;
   final StyleElement? element;
 

@@ -95,7 +95,7 @@ class StaticMapController {
     if (scale != null) params["scale"] = scale!.value;
     if (region != null) params["region"] = region;
 
-    String urlEncodeMapPart(MapPart part) => part.toUrlString();
+    String urlEncodeMapPart(EncodableUrlPart part) => part.toUrlString();
     if (markers != null) {
       params["markers"] = markers!.map(urlEncodeMapPart);
     }

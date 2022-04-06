@@ -1,13 +1,13 @@
 library google_static_maps_controller;
 
-import 'dart:ui';
 import 'dart:math';
 import 'package:flutter/widgets.dart';
+import 'package:google_static_maps_controller/src/utils/polylines_encoder.dart';
 
 part './src/widgets/static_map.dart';
 part './src/data/enums.dart';
 part './src/data/location.dart';
-part './src/data/map_part.dart';
+part 'src/data/encodable_url_part.dart';
 
 part './src/utils/utils.dart';
 part './src/controller.dart';

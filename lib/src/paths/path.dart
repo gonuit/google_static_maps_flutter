@@ -2,7 +2,7 @@ part of google_static_maps_controller;
 
 /// The path class defines a set of one or more locations
 /// connected by a path to overlay on the map image.
-class Path implements MapPart {
+class Path implements EncodableUrlPart {
   /// (optional) specifies the thickness of the path in pixels.
   /// If no weight parameter is set, the path will appear in its
   /// default thickness (5 pixels).
