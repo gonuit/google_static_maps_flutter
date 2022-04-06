@@ -2,8 +2,8 @@ import 'package:google_static_maps_controller/google_static_maps_controller.dart
 
 /// Utility class with implementation of
 /// [Encoded Polyline Algorithm](https://developers.google.com/maps/documentation/utilities/polylinealgorithm).
-class PolylinesEncoder {
-  const PolylinesEncoder._();
+class PolylineEncoder {
+  const PolylineEncoder._();
 
   /// Values are summed with 63 (the ASCII character '?') before converting them into ASCII
   static const _questionMarkCharCode = 63;

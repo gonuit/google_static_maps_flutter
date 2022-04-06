@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_static_maps_controller/google_static_maps_controller.dart';
-import 'package:google_static_maps_controller/src/utils/polylines_encoder.dart';
+import 'package:google_static_maps_controller/src/utils/polyline_encoder.dart';
 
 void main() {
   test("Polylines encoding works correctly.", () {
@@ -15,12 +15,12 @@ void main() {
     };
 
     for (final entry in precalculated.entries) {
-      expect(PolylinesEncoder.encode(entry.key), equals(entry.value));
+      expect(PolylineEncoder.encode(entry.key), equals(entry.value));
     }
   });
 
   test("Polylines path encoding works correctly.", () {
-    final data = PolylinesEncoder.encodePath([
+    final data = PolylineEncoder.encodePath([
       Location(38.5, -120.2),
       Location(40.7, -120.95),
       Location(43.252, -126.453),

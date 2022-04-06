@@ -83,7 +83,7 @@ class Location implements EncodableUrlPart {
   /// Encode this location using
   /// [Encoded Polyline Algorithm](https://developers.google.com/maps/documentation/utilities/polylinealgorithm).
   String encode() =>
-      "${PolylinesEncoder.encode(latitude)}${PolylinesEncoder.encode(longitude)}";
+      "${PolylineEncoder.encode(latitude)}${PolylineEncoder.encode(longitude)}";
 
   int get hashCode => hashValues(latitude, longitude);
 

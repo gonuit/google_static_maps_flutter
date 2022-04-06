@@ -2,7 +2,7 @@ library google_static_maps_controller;
 
 import 'dart:math';
 import 'package:flutter/widgets.dart';
-import 'package:google_static_maps_controller/src/utils/polylines_encoder.dart';
+import 'package:google_static_maps_controller/src/utils/polyline_encoder.dart';
 
 part './src/widgets/static_map.dart';
 part './src/data/enums.dart';
