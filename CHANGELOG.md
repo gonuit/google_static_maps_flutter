@@ -1,5 +1,6 @@
 ## 0.7.0-dev.1
 
+- **BREAKING CHANGE** To draw a circle path use `Path.circle` instead of `Path` constructor.
 - Added encoded polylines support
   - Added `PolylineEncoder` encoder.
 - Removed redundant white spaces from the genrated urls.

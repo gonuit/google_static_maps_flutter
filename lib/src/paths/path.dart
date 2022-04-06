@@ -2,7 +2,7 @@ part of google_static_maps_controller;
 
 /// The path class defines a set of one or more locations
 /// connected by a path to overlay on the map image.
-class Path implements EncodableUrlPart {
+abstract class Path implements EncodableUrlPart {
   /// (optional) specifies the thickness of the path in pixels.
   /// If no weight parameter is set, the path will appear in its
   /// default thickness (5 pixels).
@@ -26,67 +26,72 @@ class Path implements EncodableUrlPart {
   /// line in screen space. Defaults to false.
   final bool? geodesic;
 
-  /// (optional) Circle radius in meters.
+  const Path._internal({
+    this.weight,
+    this.color,
+    this.fillColor,
+    this.geodesic,
+  });
+
+  /// Draws a circle path
+  const factory Path.circle({
+    required Location center,
+    required int radius,
+    int? weight,
+    Color? color,
+    Color? fillColor,
+    bool? geodesic,
+  }) = _CirclePath;
+
+  /// Draws a path
+  const factory Path({
+    required List<Location> points,
+    int? weight,
+    Color? color,
+    Color? fillColor,
+    bool? geodesic,
+  }) = _Path;
+
+  List<String> _getBasePathUrlParameters() {
+    List<String> parts = <String>[];
+
+    if (weight != null) parts.add("weight:$weight");
+    if (color != null) parts.add("color:${color!.to32BitHexString()}");
+    if (geodesic != null) parts.add("geodesic:$geodesic");
+    if (fillColor != null) {
+      parts.add("fillcolor:${fillColor!.to32BitHexString()}");
+    }
+
+    return parts;
+  }
+}
+
+class _CirclePath extends Path {
+  /// The center of the circle.
+  final Location center;
+
+  /// Circle radius in meters.
   ///
   /// In order to render a circle, make sure to provide only one
   /// path point.
   ///
   /// This is not a part of the official google static maps API,
   /// but a useful addition that simplifies drawing circles.
-  final int? radius;
+  final int radius;
 
-  /// In order to draw a path, the path class must also be passed
-  /// two or more points. The Maps Static API will then connect the
-  /// path along those points, in the specified order.
-  ///
-  /// This library also accepts a single point and [radius] parameter
-  /// to draw circles.
-  final List<Location> points;
-
-  const Path({
-    required this.points,
-    this.weight,
-    this.radius,
-    this.color,
-    this.fillColor,
-    this.geodesic,
-  });
-
-  @override
-  String toUrlString() {
-    if (radius != null && points.length < 1) {
-      throw StateError(
-        'In order to draw a circle, a point is needed',
-      );
-    } else if (radius == null && points.length == 1) {
-      throw StateError(
-        'In order to draw a circle, the radius must be provided',
-      );
-    } else if (radius == null && points.length < 2) {
-      throw StateError(
-        'In order to draw a path, the path '
-        'class must also be passed two or more points. points.length=${points.length}',
-      );
-    }
-
-    List<String> parts = <String>[];
-
-    if (weight != null) parts.add("weight:$weight");
-    if (color != null) parts.add("color:${color!.to32BitHexString()}");
-    if (geodesic != null) parts.add("geodesic:$geodesic");
-    if (fillColor != null)
-      parts.add("fillcolor:${fillColor!.to32BitHexString()}");
-    if (radius != null) {
-      parts.add(
-        "${_drawCirclePath(this.points.first.latitude, this.points.first.longitude, radius!)}",
-      );
-    } else {
-      for (final location in points) {
-        parts.add(location.toUrlString());
-      }
-    }
-    return parts.join(_separator);
-  }
+  const _CirclePath({
+    required this.center,
+    required this.radius,
+    int? weight,
+    Color? color,
+    Color? fillColor,
+    bool? geodesic,
+  }) : super._internal(
+          color: color,
+          weight: weight,
+          fillColor: fillColor,
+          geodesic: geodesic,
+        );
 
   String _drawCirclePath(
     double latitude,
@@ -122,5 +127,60 @@ class Path implements EncodableUrlPart {
     }
 
     return value.toString();
+  }
+
+  @override
+  String toUrlString() {
+    List<String> parts = _getBasePathUrlParameters();
+
+    parts.add(
+      _drawCirclePath(
+        center.latitude,
+        center.longitude,
+        radius,
+      ),
+    );
+
+    return parts.join(_separator);
+  }
+}
+
+class _Path extends Path {
+  /// In order to draw a path, the path class must also be passed
+  /// two or more points. The Maps Static API will then connect the
+  /// path along those points, in the specified order.
+  ///
+  /// This library also accepts a single point and [radius] parameter
+  /// to draw circles.
+  final List<Location> points;
+
+  const _Path({
+    required this.points,
+    int? weight,
+    Color? color,
+    Color? fillColor,
+    bool? geodesic,
+  }) : super._internal(
+          color: color,
+          weight: weight,
+          fillColor: fillColor,
+          geodesic: geodesic,
+        );
+
+  @override
+  String toUrlString() {
+    if (points.length < 2) {
+      throw StateError(
+        'In order to draw a path, the path '
+        'class must also be passed two or more points. points.length=${points.length}',
+      );
+    }
+    List<String> parts = _getBasePathUrlParameters();
+
+    for (final location in points) {
+      parts.add(location.toUrlString());
+    }
+
+    return parts.join(_separator);
   }
 }

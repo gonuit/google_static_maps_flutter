@@ -42,14 +42,12 @@ class MyHomePage extends StatelessWidget {
           )
         ],
         paths: <Path>[
-          Path(
+          Path.circle(
             weight: 2,
             radius: 5000,
             color: Colors.blue,
             fillColor: Colors.red.withOpacity(0.5),
-            points: <Location>[
-              Location(-3.265628, -59.994832),
-            ],
+            center: Location(-3.265628, -59.994832),
           ),
           Path(
             weight: 2,
