@@ -26,33 +26,62 @@ abstract class Path implements EncodableUrlPart {
   /// line in screen space. Defaults to false.
   final bool? geodesic;
 
+  /// In order to draw a path, the path class must also be passed
+  /// two or more points. The Maps Static API will then connect the
+  /// path along those points, in the specified order.
+  ///
+  /// When [Path.circle] constructor is used, points will be calculated
+  /// based on the `radius`, `center` and optional `detail` parameters.
+  List<Location> get points;
+
+  /// Setting this value to true enables a
+  /// [polyline encoding](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
+  ///
+  /// It is a lossy compression algorithm that allows you
+  /// to store a series of coordinates as a single string.
+  /// Point coordinates are encoded using signed values.
+  final bool encoded;
+
   const Path._internal({
+    required this.encoded,
     this.weight,
     this.color,
     this.fillColor,
     this.geodesic,
   });
 
-  /// Draws a circle path
+  /// Draws a circle path.
   const factory Path.circle({
     required Location center,
     required int radius,
+    int detail,
+    bool encoded,
     int? weight,
     Color? color,
     Color? fillColor,
     bool? geodesic,
   }) = _CirclePath;
 
+  /// Draws a path from the provided encoded polyline string.
+  const factory Path.encodedPolyline(
+    String encodedPolyline, {
+    int? weight,
+    Color? color,
+    Color? fillColor,
+    bool? geodesic,
+  }) = _EncodedRawPath;
+
   /// Draws a path
   const factory Path({
     required List<Location> points,
+    bool encoded,
     int? weight,
     Color? color,
     Color? fillColor,
     bool? geodesic,
   }) = _Path;
 
-  List<String> _getBasePathUrlParameters() {
+  List<String> _getBaseUrlStringParts() {
     List<String> parts = <String>[];
 
     if (weight != null) parts.add("weight:$weight");
@@ -63,6 +92,27 @@ abstract class Path implements EncodableUrlPart {
     }
 
     return parts;
+  }
+
+  String toUrlString() {
+    if (points.length < 2) {
+      throw StateError(
+        'In order to draw a path, the path '
+        'class must also be passed two or more points. points.length=${points.length}',
+      );
+    }
+
+    final parts = _getBaseUrlStringParts();
+
+    if (encoded) {
+      parts.add("enc:${PolylineEncoder.encodePath(points)}");
+    } else {
+      for (final location in points) {
+        parts.add(location.toUrlString());
+      }
+    }
+
+    return parts.join(_separator);
   }
 }
 
@@ -79,35 +129,20 @@ class _CirclePath extends Path {
   /// but a useful addition that simplifies drawing circles.
   final int radius;
 
-  const _CirclePath({
-    required this.center,
-    required this.radius,
-    int? weight,
-    Color? color,
-    Color? fillColor,
-    bool? geodesic,
-  }) : super._internal(
-          color: color,
-          weight: weight,
-          fillColor: fillColor,
-          geodesic: geodesic,
-        );
+  /// The number of [points] that will be generated to describe the circle.
+  final int detail;
 
-  String _drawCirclePath(
-    double latitude,
-    double longitude,
-    int radius, {
-    int detail = 8,
-  }) {
+  @override
+  List<Location> get points {
     int R = 6371;
 
-    double lat = (latitude * pi) / 180;
-    double lng = (longitude * pi) / 180;
+    double lat = (center.latitude * pi) / 180;
+    double lng = (center.longitude * pi) / 180;
     double d = (radius / 1000) / R;
 
     int i = 0;
 
-    final value = StringBuffer();
+    final path = <Location>[];
 
     for (i = 0; i <= 360; i += detail) {
       double brng = (i * pi) / 180;
@@ -120,47 +155,68 @@ class _CirclePath extends Path {
           pi;
       plat = (plat * 180) / pi;
 
-      if (value.isNotEmpty) {
-        value.write(_separator);
-      }
-      value.write("$plat,$plng");
+      path.add(Location(plat, plng));
     }
 
-    return value.toString();
+    return path;
   }
 
-  @override
-  String toUrlString() {
-    List<String> parts = _getBasePathUrlParameters();
-
-    parts.add(
-      _drawCirclePath(
-        center.latitude,
-        center.longitude,
-        radius,
-      ),
-    );
-
-    return parts.join(_separator);
-  }
-}
-
-class _Path extends Path {
-  /// In order to draw a path, the path class must also be passed
-  /// two or more points. The Maps Static API will then connect the
-  /// path along those points, in the specified order.
-  ///
-  /// This library also accepts a single point and [radius] parameter
-  /// to draw circles.
-  final List<Location> points;
-
-  const _Path({
-    required this.points,
+  const _CirclePath({
+    required this.center,
+    required this.radius,
+    this.detail = 8,
+    bool encoded = false,
     int? weight,
     Color? color,
     Color? fillColor,
     bool? geodesic,
   }) : super._internal(
+          encoded: encoded,
+          color: color,
+          weight: weight,
+          fillColor: fillColor,
+          geodesic: geodesic,
+        );
+}
+
+class _Path extends Path {
+  @override
+  final List<Location> points;
+
+  const _Path({
+    required this.points,
+    bool encoded = false,
+    int? weight,
+    Color? color,
+    Color? fillColor,
+    bool? geodesic,
+  }) : super._internal(
+          encoded: encoded,
+          color: color,
+          weight: weight,
+          fillColor: fillColor,
+          geodesic: geodesic,
+        );
+}
+
+class _EncodedRawPath extends Path {
+  List<Location> get points {
+    throw UnimplementedError(
+      "Currently points getter is not supported for predefined polylines.",
+    );
+  }
+
+  /// Encoded polyline string
+  final String encodedPolyline;
+
+  const _EncodedRawPath(
+    this.encodedPolyline, {
+    int? weight,
+    Color? color,
+    Color? fillColor,
+    bool? geodesic,
+  }) : super._internal(
+          encoded: true,
           color: color,
           weight: weight,
           fillColor: fillColor,
@@ -169,18 +225,10 @@ class _Path extends Path {
 
   @override
   String toUrlString() {
-    if (points.length < 2) {
-      throw StateError(
-        'In order to draw a path, the path '
-        'class must also be passed two or more points. points.length=${points.length}',
-      );
+    if (encodedPolyline.isEmpty) {
+      throw StateError('Encoded polyline cannot be empty.');
     }
-    List<String> parts = _getBasePathUrlParameters();
-
-    for (final location in points) {
-      parts.add(location.toUrlString());
-    }
-
+    final parts = _getBaseUrlStringParts()..add("enc:$encodedPolyline");
     return parts.join(_separator);
   }
 }
