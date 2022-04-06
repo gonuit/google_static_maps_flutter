@@ -14,6 +14,12 @@ class StaticMapController {
 
   final List<Path>? paths;
 
+  /// (optional) specifies one or more locations that should remain visible
+  /// on the map, though no markers or other indicators will be displayed.
+  /// Use this parameter to ensure that certain features or map locations
+  /// are shown on the Maps Static API.
+  final List<String> visible;
+
   /// Defines the center of the map, equidistant from all edges of the map.
   final Location? center;
 
@@ -167,7 +173,9 @@ class StaticMapController {
         assert(
           !(styles != null && mapId != null),
           "mapId cannot be provided together with styles argument.",
-        );
+        ),
+        // TODO: Add viewports support.
+        visible = const [];
 
   StaticMapController copyWith({
     String? googleApiKey,
