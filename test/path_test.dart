@@ -249,7 +249,7 @@ void main() {
       equals('10.0,10.0|-10.0,10.0'),
     );
   });
-  test("Encoded property works correctly.", () {
+  test("Encoded property works correctly for the Path constructor.", () {
     final notEncodedPath = Path(
       weight: 2,
       encoded: false,
@@ -278,6 +278,50 @@ void main() {
     expect(
       encodedPath.toUrlString(),
       equals('weight:2|enc:_p~iF~ps|U_ulLnnqC_mqNvxq`@'),
+    );
+  });
+  test("Encoded property works correctly for the Path.circle constructor.", () {
+    final notEncodedPath = Path.circle(
+      weight: 2,
+      radius: 5000,
+      detail: 10,
+      encoded: false,
+      center: Location(38.5, -120.2),
+    );
+
+    expect(
+      notEncodedPath.toUrlString(),
+      equals(
+        'weight:2|'
+        '38.54496608029594,-120.2|'
+        '38.53637347030108,-120.16621073250631|'
+        '38.51388258416807,-120.14534489518861|'
+        '38.48609202568267,-120.14536597791356|'
+        '38.46361683151974,-120.16624484509843|'
+        '38.455033919704064,-120.2|'
+        '38.46361683151974,-120.23375515490157|'
+        '38.48609202568267,-120.25463402208646|'
+        '38.51388258416807,-120.2546551048114|'
+        '38.53637347030108,-120.2337892674937|'
+        '38.54496608029594,-120.2',
+      ),
+    );
+
+    final encodedPath = Path.circle(
+      weight: 2,
+      radius: 5000,
+      detail: 10,
+      encoded: true,
+      center: Location(38.5, -120.2),
+    );
+
+    expect(
+      encodedPath.toUrlString(),
+      equals(
+        'weight:2|'
+        'enc:aigjF~ps|Utt@erEpkCmaCtlDBnkCnaCrt@~q'
+        'Est@~qEokCnaCulDBqkCmaCut@erE',
+      ),
     );
   });
 

@@ -130,22 +130,39 @@ class _CirclePath extends Path {
   final int radius;
 
   /// The number of [points] that will be generated to describe the circle.
+  /// The actual number of points is `detail + 1` because the last point
+  /// will be the same as the first.
+  ///
+  /// #### IMPORTANT:
+  /// - Must be greater than or equal to 3.
+  /// - `360 % detail` must be 0.
   final int detail;
 
   @override
   List<Location> get points {
-    int R = 6371;
+    if (detail < 3) {
+      throw StateError(
+        "At least the detail of 3 is required to draw a circle.",
+      );
+    } else if (360 % detail != 0) {
+      throw StateError(
+        "The remainder when dividing 360 by detail must be 0. "
+        "Current reminder of 360 % $detail equals ${360 % 8} which is not 0.",
+      );
+    }
 
-    double lat = (center.latitude * pi) / 180;
-    double lng = (center.longitude * pi) / 180;
-    double d = (radius / 1000) / R;
+    const R = 6371;
 
-    int i = 0;
+    final lat = (center.latitude * pi) / 180;
+    final lng = (center.longitude * pi) / 180;
+    final d = (radius / 1000) / R;
 
     final path = <Location>[];
 
-    for (i = 0; i <= 360; i += detail) {
-      double brng = (i * pi) / 180;
+    final step = 360 ~/ detail;
+
+    for (int i = 0; i < 360; i += step) {
+      final brng = (i * pi) / 180;
 
       double plat = asin(sin(lat) * cos(d) + cos(lat) * sin(d) * cos(brng));
       double plng = ((lng +
@@ -158,13 +175,16 @@ class _CirclePath extends Path {
       path.add(Location(plat, plng));
     }
 
+    /// Close the circle.
+    path.add(path.first);
+
     return path;
   }
 
   const _CirclePath({
     required this.center,
     required this.radius,
-    this.detail = 8,
+    this.detail = 45,
     bool encoded = false,
     int? weight,
     Color? color,
