@@ -4,7 +4,7 @@ repository: https://github.com/gonuit/flutter_google_static_maps
 homepage: https://github.com/gonuit/flutter_google_static_maps
 issue_tracker: https://github.com/gonuit/flutter_google_static_maps/issues
 
-version: 0.7.0-dev.1
+version: 0.7.0-dev.2
 
 environment:
   sdk: '>=2.12.0 <3.0.0'

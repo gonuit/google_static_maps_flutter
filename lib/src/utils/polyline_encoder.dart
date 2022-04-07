@@ -1,4 +1,4 @@
-import 'package:google_static_maps_controller/google_static_maps_controller.dart';
+part of google_static_maps_controller;
 
 /// Utility class with implementation of
 /// [Encoded Polyline Algorithm](https://developers.google.com/maps/documentation/utilities/polylinealgorithm).

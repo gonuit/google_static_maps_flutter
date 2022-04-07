@@ -1,4 +1,4 @@
-import 'package:google_static_maps_controller/google_static_maps_controller.dart';
+part of google_static_maps_controller;
 
 /// The Maps Static API uses numbers (latitude and longitude values) or string
 /// (address) to specify a location.

@@ -6,7 +6,7 @@ class DefaultMarker extends Marker {
   final String? label;
 
   const DefaultMarker({
-    required List<Location> locations,
+    required List<GeocodedLocation> locations,
     this.color,
     this.size,
     this.label,

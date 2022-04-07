@@ -32,7 +32,7 @@ abstract class Path implements EncodableUrlPart {
   ///
   /// When [Path.circle] constructor is used, points will be calculated
   /// based on the `radius`, `center` and optional `detail` parameters.
-  List<Location> get points;
+  List<GeocodedLocation> get points;
 
   /// Setting this value to true enables a
   /// [polyline encoding](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
@@ -41,6 +41,8 @@ abstract class Path implements EncodableUrlPart {
   /// to store a series of coordinates as a single string.
   /// Point coordinates are encoded using signed values.
   final bool encoded;
+
+  bool get hasAddressPoints => points.any((point) => point is AddressLocation);
 
   const Path._internal({
     required this.encoded,
@@ -60,7 +62,7 @@ abstract class Path implements EncodableUrlPart {
     Color? color,
     Color? fillColor,
     bool? geodesic,
-  }) = _CirclePath;
+  }) = CirclePath;
 
   /// Draws a path from the provided encoded polyline string.
   const factory Path.encodedPolyline(
@@ -69,11 +71,11 @@ abstract class Path implements EncodableUrlPart {
     Color? color,
     Color? fillColor,
     bool? geodesic,
-  }) = _EncodedRawPath;
+  }) = EncodedPath;
 
   /// Draws a path
   const factory Path({
-    required List<Location> points,
+    required List<GeocodedLocation> points,
     bool encoded,
     int? weight,
     Color? color,
@@ -104,8 +106,15 @@ abstract class Path implements EncodableUrlPart {
 
     final parts = _getBaseUrlStringParts();
 
-    if (encoded) {
-      parts.add("enc:${PolylineEncoder.encodePath(points)}");
+    assert(
+      !encoded || encoded && !hasAddressPoints,
+      'Cannot encode path using polyline encoding when address locations '
+      'are defined. Use Location (GeocodedLocation.latLng) '
+      'instead of AddressLocation (GeocodedLocation.address) class.',
+    );
+
+    if (encoded && !hasAddressPoints) {
+      parts.add("enc:${PolylineEncoder.encodePath(points as List<Location>)}");
     } else {
       for (final location in points) {
         parts.add(location.toUrlString());
@@ -116,7 +125,7 @@ abstract class Path implements EncodableUrlPart {
   }
 }
 
-class _CirclePath extends Path {
+class CirclePath extends Path {
   /// The center of the circle.
   final Location center;
 
@@ -134,15 +143,15 @@ class _CirclePath extends Path {
   /// will be the same as the first.
   ///
   /// #### IMPORTANT:
-  /// - Must be greater than or equal to 3.
+  /// - Must be greater than or equal to 4.
   /// - `360 % detail` must be 0.
   final int detail;
 
   @override
   List<Location> get points {
-    if (detail < 3) {
+    if (detail < 4) {
       throw StateError(
-        "At least the detail of 3 is required to draw a circle.",
+        "At least the detail of 4 is required to draw a circle.",
       );
     } else if (360 % detail != 0) {
       throw StateError(
@@ -181,7 +190,7 @@ class _CirclePath extends Path {
     return path;
   }
 
-  const _CirclePath({
+  const CirclePath({
     required this.center,
     required this.radius,
     this.detail = 45,
@@ -201,7 +210,7 @@ class _CirclePath extends Path {
 
 class _Path extends Path {
   @override
-  final List<Location> points;
+  final List<GeocodedLocation> points;
 
   const _Path({
     required this.points,
@@ -219,7 +228,7 @@ class _Path extends Path {
         );
 }
 
-class _EncodedRawPath extends Path {
+class EncodedPath extends Path {
   List<Location> get points {
     throw UnimplementedError(
       "Currently points getter is not supported for predefined polylines.",
@@ -229,7 +238,7 @@ class _EncodedRawPath extends Path {
   /// Encoded polyline string
   final String encodedPolyline;
 
-  const _EncodedRawPath(
+  const EncodedPath(
     this.encodedPolyline, {
     int? weight,
     Color? color,
