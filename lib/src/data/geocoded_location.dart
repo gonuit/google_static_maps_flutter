@@ -15,6 +15,7 @@ abstract class GeocodedLocation extends EncodableUrlPart {
       Location;
 }
 
+/// Geocoded location specified by the [address] string.
 class AddressLocation implements GeocodedLocation {
   final String address;
 
