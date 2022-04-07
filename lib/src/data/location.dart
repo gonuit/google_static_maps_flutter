@@ -1,7 +1,7 @@
 part of google_static_maps_controller;
 
 @immutable
-class Location implements EncodableUrlPart {
+class Location implements EncodableUrlPart, GeocodedLocation {
   const Location(double latitude, double longitude)
       : latitude =
             latitude < -90.0 ? -90.0 : (90.0 < latitude ? 90.0 : latitude),
