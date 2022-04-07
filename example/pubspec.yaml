@@ -1,6 +1,6 @@
 name: example
 description: Google Static Maps example app
-version: 1.0.0+1
+version: 1.1.0
 publish_to: none
 
 environment:
@@ -9,12 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_static_maps_controller: 
+  google_static_maps_controller:
     path: ../
 
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
+  flutter_lints: any
   flutter_test:
     sdk: flutter
 

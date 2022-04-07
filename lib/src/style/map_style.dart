@@ -1,13 +1,13 @@
 part of google_static_maps_controller;
 
-class StyleRule implements EncodableUrlPart {
-  final String _key;
-  final String? _value;
+abstract class StyleRule implements EncodableUrlPart {
+  String get key;
+  String get value;
+
+  const StyleRule();
 
   /// Indicates the basic color.
-  StyleRule.hue(Color hue)
-      : _key = "hue",
-        _value = hue.to24BitHexString();
+  const factory StyleRule.hue(Color hue) = _StyleHueRule;
 
   /// (a floating point value between -100 and 100) indicates the percentage
   /// change in brightness of the element. Negative values increase darkness
@@ -20,13 +20,7 @@ class StyleRule implements EncodableUrlPart {
   /// base map. If Google makes any changes to the base map style, the changes
   /// affect your map's features styled with lightness. It's better to use the
   /// absolute color styler if you can.
-  StyleRule.lightness(int lightness)
-      : assert(
-          lightness >= -100 && lightness <= 100,
-          "lightness argument must be in range -100 to 100",
-        ),
-        _key = "lightness",
-        _value = lightness.toString();
+  const factory StyleRule.lightness(int lightness) = _StyleLightnessRule;
 
   /// (a floating point value between -100 and 100) indicates the percentage
   /// change in intensity of the basic color to apply to the element.
@@ -37,13 +31,7 @@ class StyleRule implements EncodableUrlPart {
   /// If Google makes any changes to the base map style, the changes affect your
   /// map's features styled with saturation. It's better to use the absolute color
   /// styler if you can.
-  StyleRule.saturation(int saturation)
-      : assert(
-          saturation >= -100 && saturation <= 100,
-          "saturation argument must be in range -100 to 100",
-        ),
-        _key = "saturation",
-        _value = saturation.toString();
+  const factory StyleRule.saturation(int saturation) = _StyleSaturationRule;
 
   /// (a floating point value between 0.01 and 10.0, where 1.0 applies no correction)
   /// indicates the amount of gamma correction to apply to the element. Gamma corrections
@@ -56,13 +44,7 @@ class StyleRule implements EncodableUrlPart {
   /// a gamma curve. If Google makes any changes to the base map style, the changes affect
   /// your map's features styled with gamma. It's better to use the absolute color styler
   /// if you can.
-  StyleRule.gamma(double gamma)
-      : assert(
-          gamma >= 0.01 && gamma <= 10.0,
-          "gamma argument must be in range 0.01 to 10.0",
-        ),
-        _key = "gamma",
-        _value = gamma.toString();
+  const factory StyleRule.gamma(double gamma) = _StyleGammaRule;
 
   /// (if true) inverts the existing lightness. This is useful, for example, for quickly
   /// switching to a darker map with white text.
@@ -70,37 +52,129 @@ class StyleRule implements EncodableUrlPart {
   /// Note: This option simply inverts the default Google style. If Google makes any
   /// changes to the base map style, the changes affect your map's features styled with
   /// invert_lightness. It's better to use the absolute color styler if you can.
-  StyleRule.invertLightness(bool invertLightness)
-      : _key = "invert_lightness",
-        _value = invertLightness.toString();
+  const factory StyleRule.invertLightness(bool invertLightness) =
+      _StyleInvertLightnessRule;
 
   /// indicates whether and how the element appears on the map. A simplified visibility
   /// removes some style features from the affected features; roads, for example, are
   /// simplified into thinner lines without outlines, while parks lose their label text
   /// but retain the label icon.
-  StyleRule.visibility(VisibilityRule visibility)
-      : _key = "visibility",
-        _value = visibility.value;
+  const factory StyleRule.visibility(VisibilityRule visibility) =
+      _StyleVisibilityRule;
 
   /// sets the color of the feature.
-  StyleRule.color(Color color)
-      : _key = "color",
-        _value = color.to24BitHexString();
+  const factory StyleRule.color(Color color) = _StyleColorRule;
 
   /// (an integer value, greater than or equal to zero) sets the weight of the feature,
   /// in pixels. Setting the weight to a high value may result in clipping near tile borders.
-  StyleRule.weight(int weight)
+  const factory StyleRule.weight(int weight) = _StyleWeightRule;
+
+  String toUrlString() => "$key:$value";
+
+  @override
+  String toString() => "$runtimeType($key, $value)";
+}
+
+class _StyleHueRule extends StyleRule {
+  final Color hue;
+
+  @override
+  String get key => "hue";
+  @override
+  String get value => hue.to24BitHexString();
+  const _StyleHueRule(this.hue);
+}
+
+class _StyleColorRule extends StyleRule {
+  final Color color;
+
+  @override
+  String get key => "color";
+  @override
+  String get value => color.to24BitHexString();
+  const _StyleColorRule(this.color);
+}
+
+class _StyleLightnessRule extends StyleRule {
+  final int lightness;
+
+  @override
+  String get key => "lightness";
+  @override
+  String get value => lightness.toString();
+
+  const _StyleLightnessRule(this.lightness)
+      : assert(
+          lightness >= -100 && lightness <= 100,
+          "lightness argument must be in range -100 to 100",
+        );
+}
+
+class _StyleSaturationRule extends StyleRule {
+  final int saturation;
+
+  @override
+  String get key => "saturation";
+  @override
+  String get value => saturation.toString();
+
+  const _StyleSaturationRule(this.saturation)
+      : assert(
+          saturation >= -100 && saturation <= 100,
+          "saturation argument must be in range -100 to 100",
+        );
+}
+
+class _StyleWeightRule extends StyleRule {
+  final int weight;
+
+  @override
+  String get key => "weight";
+  @override
+  String get value => weight.toString();
+
+  const _StyleWeightRule(this.weight)
       : assert(
           weight >= 0,
           "weight argument should be greater than or equal to zero",
-        ),
-        _key = "weight",
-        _value = weight.toString();
+        );
+}
 
-  String toUrlString() => "$_key:$_value";
+class _StyleGammaRule extends StyleRule {
+  final double gamma;
 
   @override
-  String toString() => "$runtimeType($_key, $_value)";
+  String get key => "gamma";
+  @override
+  String get value => gamma.toString();
+
+  const _StyleGammaRule(this.gamma)
+      : assert(
+          gamma >= 0.01 && gamma <= 10.0,
+          "gamma argument must be in range 0.01 to 10.0",
+        );
+}
+
+class _StyleInvertLightnessRule extends StyleRule {
+  final bool invertLightness;
+
+  @override
+  String get key => "invert_lightness";
+  @override
+  String get value => invertLightness.toString();
+
+  const _StyleInvertLightnessRule(this.invertLightness);
+}
+
+class _StyleVisibilityRule extends StyleRule {
+  final VisibilityRule visibility;
+
+  @override
+  String get key => "visibility";
+  @override
+  String get value => visibility.value;
+
+  const _StyleVisibilityRule(this.visibility);
 }
 
 class MapStyle implements EncodableUrlPart {

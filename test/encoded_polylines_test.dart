@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_static_maps_controller/google_static_maps_controller.dart';
-import 'package:google_static_maps_controller/src/utils/polyline_encoder.dart';
 
 void main() {
   test("Polylines encoding works correctly.", () {

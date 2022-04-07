@@ -106,6 +106,9 @@ class StaticMapController {
     if (paths != null) {
       params["path"] = paths!.map(urlEncodeMapPart);
     }
+    if (visible != null) {
+      params["visible"] = visible!.map(urlEncodeMapPart);
+    }
 
     if (mapId != null && styles != null) {
       throw StateError(
@@ -165,6 +168,7 @@ class StaticMapController {
     this.language,
     this.region,
     this.signature,
+    this.visible,
   })  : assert(
           (center != null && zoom != null) || markers != null,
           "center and zoom should be provided when markers are not",
@@ -172,9 +176,7 @@ class StaticMapController {
         assert(
           !(styles != null && mapId != null),
           "mapId cannot be provided together with styles argument.",
-        ),
-        // TODO: Add viewports support.
-        visible = null;
+        );
 
   StaticMapController copyWith({
     String? googleApiKey,

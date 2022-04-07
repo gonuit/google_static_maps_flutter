@@ -1,4 +1,4 @@
-## 0.7.0-dev.1
+## 1.0.0-dev.1
 
 - **BREAKING CHANGE** To draw a circle path use `Path.circle` instead of `Path` constructor.
   - Added optional `detail` parameter.
@@ -9,6 +9,8 @@
 - Removed redundant white spaces from the genrated urls.
 - Added support for arithmetic operators to the `Location` class.
 - Added `GeocodedLocation` with the constructors `address` and `latLng`, which allows the user to define parameters such as `center` and `visible` not only by the lng lat values, but also by addresses.
+- Allow using addresses in paths and markers.
+- Updated example app.
 
 ## 0.6.0
 

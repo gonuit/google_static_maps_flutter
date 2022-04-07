@@ -114,7 +114,7 @@ abstract class Path implements EncodableUrlPart {
     );
 
     if (encoded && !hasAddressPoints) {
-      parts.add("enc:${PolylineEncoder.encodePath(points as List<Location>)}");
+      parts.add("enc:${PolylineEncoder.encodePath(points.cast<Location>())}");
     } else {
       for (final location in points) {
         parts.add(location.toUrlString());

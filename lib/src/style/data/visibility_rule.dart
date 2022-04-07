@@ -7,7 +7,7 @@ enum VisibilityRule {
 }
 
 extension VisibilityRuleExtension on VisibilityRule {
-  String? get value {
+  String get value {
     switch (this) {
       case VisibilityRule.on:
         return "on";
@@ -15,8 +15,6 @@ extension VisibilityRuleExtension on VisibilityRule {
         return "off";
       case VisibilityRule.simplified:
         return "simplified";
-      default:
-        return null;
     }
   }
 }

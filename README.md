@@ -1,103 +1,110 @@
 # google_static_maps_controller
+
 [![Codemagic build status](https://api.codemagic.io/apps/5e70ce446e13eb493ea3b675/5e70ce446e13eb493ea3b674/status_badge.svg)](https://codemagic.io/apps/5e70ce446e13eb493ea3b675/5e70ce446e13eb493ea3b674/latest_build)
 
 The package provides simple and declarative access to the Google Static Maps service.
 
 | Feature                 | Status |
 | :---------------------- | :----: |
-| Base Static map support |   ✅    |
-| Zoom levels             |   ✅    |
-| Image sizes             |   ✅    |
-| Map types               |   ✅    |
-| Markers                 |   ✅    |
-| Map styles              |   ✅    |
-| Paths                   |   ✅    |
-| Encoded Polylines       |   ✅    |
-| Viewports               |   ⚙️    |
-
+| Base Static map support |   ✅   |
+| Zoom levels             |   ✅   |
+| Image sizes             |   ✅   |
+| Map types               |   ✅   |
+| Markers                 |   ✅   |
+| Map styles              |   ✅   |
+| Paths                   |   ✅   |
+| Encoded Polylines       |   ✅   |
+| Viewports               |   ✅   |
 
 ✅ - done  
 🧪 - experimental  
-⚙️  - work in progress  
-❌ - not yet implemented 
-
-## Example:
-![map_screenshot](./readme/screen.png)
+⚙️ - work in progress  
+❌ - not yet implemented
 
 ## Getting Started
 
-### StaticMap widget:
+### Example map image
+
+![map_screenshot](./readme/screen_no_style.png)
+
+### source code:
+
 ```dart
 // ***
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        /// Declare your static map
-        child: StaticMap(
-          width: 400,
-          height: 400,
-          scaleToDevicePixelRatio: true,
-          googleApiKey: "<GOOGLE_API_KEY>",
-          paths: <Path>[
-            Path.circle(
-              // Can be both, location or address eg:
-              // center: GeocodedLocation.address("City Hall, New York, NY"),
-              center: Location(-3.265628, -59.994832),
-              radius: 5000, // meters
-              weight: 2,
-              color: Colors.blue,
-              fillColor: Colors.red.withOpacity(0.5),
-            ),
-            Path(
-              weight: 2,
-              color: Colors.blue,
-              fillColor: Colors.purple.withOpacity(0.5),
-              points: <Location>[
-                Location(-3.220028, -59.924832),
-                Location(-3.234028, -59.964832),
-                Location(-3.265628, -59.994832),
-                Location(-3.261128, -59.947832),
-                Location(-3.216728, -59.895832),
-                Location(-3.220028, -59.924832),
-              ],
-            ),
-            Path(
-              weight: 3,
-              color: Colors.blue,
-              points: <Location>[
-                Location(-3.352538, -60.163816),
-                Location(-3.314760, -60.050712),
-                Location(-3.364583, -59.942379),
-                Location(-3.268667, -59.901430),
-                Location(-3.198791, -59.876131),
-              ],
-            )
-          ],
-          /// Declare optional markers
-          markers: <Marker>[
-            /// Define marker style
-            Marker(
-              color: Colors.lightBlue,
-              label: "A",
-              locations: [
-                /// Provide locations for markers of a defined style
-                Location(-3.1178833, -60.0029284),
-                Location(-3.1467579, -59.8753814),
-              ],
-            ),
-            /// Define another marker style with custom icon
-            Marker.custom(
-              anchor: MarkerAnchor.bottom,
-              icon: "https://goo.gl/1oTJ9Y",
-              locations: [
-                Location(-3.1694166, -60.1041517),
-              ],
-            )
+    return StaticMap(
+      googleApiKey: "<REPLACE-WITH-GOOGLE-API-KEY>",
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      scaleToDevicePixelRatio: true,
+      zoom: 14,
+      visible: const [
+        GeocodedLocation.address('Santa Monica Pier'),
+      ],
+      styles: retroMapStyle,
+      paths: <Path>[
+        const Path(
+          color: Colors.blue,
+          points: [
+            // Can be both, addresses and coordinates.
+            GeocodedLocation.address('Santa Monica Pier'),
+            Location(34.011395, -118.494961),
+            Location(34.011921, -118.493360),
+            Location(34.012471, -118.491884),
+            Location(34.012710, -118.489420),
+            Location(34.014294, -118.486595),
+            Location(34.016630, -118.482920),
+            Location(34.018899, -118.480087),
+            Location(34.021314, -118.477136),
+            Location(34.022769, -118.474901),
           ],
         ),
-      ),
+        Path.circle(
+          center: const Location(34.005641, -118.490229),
+          color: Colors.green.withOpacity(0.8),
+          fillColor: Colors.green.withOpacity(0.4),
+          encoded: true, // encode using encoded polyline algorithm
+          radius: 200, // meters
+        ),
+        const Path(
+          encoded: true,
+          points: [
+            Location(34.016839, -118.488240),
+            Location(34.019498, -118.491439),
+            Location(34.024106, -118.485734),
+            Location(34.021486, -118.482682),
+            Location(34.016839, -118.488240),
+          ],
+          fillColor: Colors.black45,
+          color: Colors.black,
+        )
+      ],
+      markers: const <Marker>[
+        Marker(
+          color: Colors.amber,
+          label: "X",
+          locations: [
+            GeocodedLocation.address("Santa Monica Pier"),
+            GeocodedLocation.latLng(34.012849, -118.501478),
+          ],
+        ),
+        Marker.custom(
+          anchor: MarkerAnchor.center,
+          icon: "https://goo.gl/1oTJ9Y",
+          locations: [
+            Location(34.012343, -118.482998),
+          ],
+        ),
+        Marker(
+          locations: [
+            Location(34.006618, -118.500901),
+          ],
+          color: Colors.cyan,
+          label: "W",
+        )
+      ],
     );
   }
 
@@ -129,4 +136,3 @@ The package provides simple and declarative access to the Google Static Maps ser
     );
   }
 ```
-
