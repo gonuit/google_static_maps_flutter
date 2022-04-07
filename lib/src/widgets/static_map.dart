@@ -7,8 +7,14 @@ class StaticMap extends StatelessWidget {
   final List<MapStyle>? styles;
   final List<Path>? paths;
 
+  /// (optional) specifies one or more locations that should remain visible
+  /// on the map, though no markers or other indicators will be displayed.
+  /// Use this parameter to ensure that certain features or map locations
+  /// are shown on the Maps Static API.
+  final List<GeocodedLocation>? visible;
+
   /// Defines the center of the map, equidistant from all edges of the map.
-  final Location? center;
+  final GeocodedLocation? center;
 
   /// Defines the zoom level of the map, which determines the magnification
   /// level of the map. This parameter takes a numerical value corresponding
@@ -82,6 +88,7 @@ class StaticMap extends StatelessWidget {
     this.width,
     this.height,
     this.markers,
+    this.visible,
     this.center,
     this.zoom,
     this.scale,
@@ -122,6 +129,7 @@ class StaticMap extends StatelessWidget {
             language: language,
             maptype: maptype,
             markers: markers,
+            visible: visible,
             paths: paths,
             region: region,
             signature: signature,

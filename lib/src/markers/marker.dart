@@ -1,13 +1,13 @@
 part of google_static_maps_controller;
 
-abstract class Marker implements MapPart {
-  final List<Location> locations;
+abstract class Marker implements EncodableUrlPart {
+  final List<GeocodedLocation> locations;
 
   const Marker._(this.locations);
 
   /// Create default google maps style marker
   const factory Marker({
-    required List<Location> locations,
+    required List<GeocodedLocation> locations,
     Color? color,
     MarkerSize? size,
     String? label,

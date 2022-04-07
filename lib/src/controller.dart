@@ -14,8 +14,14 @@ class StaticMapController {
 
   final List<Path>? paths;
 
+  /// (optional) specifies one or more locations that should remain visible
+  /// on the map, though no markers or other indicators will be displayed.
+  /// Use this parameter to ensure that certain features or map locations
+  /// are shown on the Maps Static API.
+  final List<GeocodedLocation>? visible;
+
   /// Defines the center of the map, equidistant from all edges of the map.
-  final Location? center;
+  final GeocodedLocation? center;
 
   /// defines the zoom level of the map, which determines the magnification
   /// level of the map. This parameter takes a numerical value corresponding
@@ -85,9 +91,7 @@ class StaticMapController {
     params["key"] = googleApiKey;
     params["size"] = "${width}x$height";
 
-    /// TODO: center could be string
-    if (center != null)
-      params["center"] = "${center!.latitude}, ${center!.longitude}";
+    if (center != null) params["center"] = center!.toUrlString();
     if (language != null) params["language"] = language;
     if (maptype != null) params["maptype"] = maptype!.value;
     if (zoom != null) params["zoom"] = zoom!.toString();
@@ -95,12 +99,12 @@ class StaticMapController {
     if (scale != null) params["scale"] = scale!.value;
     if (region != null) params["region"] = region;
 
-    String urlEncodeMapPart(MapPart part) => part.toUrlString();
+    String urlEncodeMapPart(EncodableUrlPart part) => part.toUrlString();
     if (markers != null) {
       params["markers"] = markers!.map(urlEncodeMapPart);
     }
-    if (paths != null) {
-      params["path"] = paths!.map(urlEncodeMapPart);
+    if (visible != null) {
+      params["visible"] = visible!.map(urlEncodeMapPart);
     }
 
     if (mapId != null && styles != null) {
@@ -112,6 +116,10 @@ class StaticMapController {
       params["map_id"] = mapId;
     } else if (styles != null) {
       params["style"] = styles!.map(urlEncodeMapPart);
+    }
+
+    if (paths != null) {
+      params["path"] = paths!.map(urlEncodeMapPart);
     }
 
     return params;
@@ -161,6 +169,7 @@ class StaticMapController {
     this.language,
     this.region,
     this.signature,
+    this.visible,
   })  : assert(
           (center != null && zoom != null) || markers != null,
           "center and zoom should be provided when markers are not",
@@ -176,7 +185,7 @@ class StaticMapController {
     int? height,
     List<Marker>? markers,
     List<Path>? paths,
-    Location? center,
+    GeocodedLocation? center,
     int? zoom,
     MapScale? scale,
     MapImageFormat? format,

@@ -9,10 +9,10 @@ void main() {
         googleApiKey: _mockedGoogleApiKey,
         width: 200,
         height: 300,
-        center: Location(-3.1467579, -59.8753814),
+        center: const GeocodedLocation.latLng(-3.1467579, -59.8753814),
         zoom: 10,
         styles: [
-          MapStyle(
+          const MapStyle(
             element: StyleElement.geometry,
             rules: [
               StyleRule.hue(Colors.red),
@@ -24,7 +24,7 @@ void main() {
           MapStyle(
             feature: StyleFeature.poi.government,
             element: StyleElement.geometry.fill,
-            rules: [
+            rules: const [
               StyleRule.visibility(VisibilityRule.simplified),
               StyleRule.color(Colors.green),
             ],
@@ -36,7 +36,7 @@ void main() {
         "https://maps.googleapis.com/maps/api/staticmap"
         "?key=GOOGLE_API_KEY"
         "&size=200x300"
-        "&center=-3.1467579%2C+-59.87538140000001"
+        "&center=-3.1467579%2C-59.87538140000001"
         "&zoom=10"
         "&style=element%3Ageometry"
         "%7Chue%3A0xf44336"

@@ -11,6 +11,7 @@ class CustomMarker extends Marker {
     this.anchor,
   }) : super._(locations);
 
+  @override
   String toUrlString() {
     if (locations.isEmpty) {
       throw StateError(
