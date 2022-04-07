@@ -2,6 +2,7 @@ library google_static_maps_controller;
 
 import 'dart:math';
 import 'package:flutter/widgets.dart';
+import 'package:google_static_maps_controller/src/data/geocoded_location.dart';
 import 'package:google_static_maps_controller/src/utils/polyline_encoder.dart';
 
 part './src/widgets/static_map.dart';

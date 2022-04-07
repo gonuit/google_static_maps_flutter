@@ -42,7 +42,7 @@ The package provides simple and declarative access to the Google Static Maps ser
           googleApiKey: "<GOOGLE_API_KEY>",
           paths: <Path>[
             Path.circle(
-              center: Location(-3.265628, -59.994832),
+              center: GeocodedLocation.latLng(-3.265628, -59.994832),
               radius: 5000, // meters
               weight: 2,
               color: Colors.blue,
@@ -111,7 +111,7 @@ The package provides simple and declarative access to the Google Static Maps ser
       width: 400,
       height: 400,
       zoom: 10,
-      center: Location(-3.1178833, -60.0029284),
+      center: GeocodedLocation.latLng(-3.1178833, -60.0029284),
     );
 
     /// Get map image provider from controller.

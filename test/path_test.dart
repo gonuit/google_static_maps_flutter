@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_static_maps_controller/google_static_maps_controller.dart';
+import 'package:google_static_maps_controller/src/data/geocoded_location.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +14,7 @@ void main() {
       height: 300,
       width: 200,
       zoom: 10,
-      center: const Location(20, 30),
+      center: const GeocodedLocation.latLng(20, 30),
       paths: [
         Path(
           color: Colors.red,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_static_maps_controller/google_static_maps_controller.dart';
+import 'package:google_static_maps_controller/src/data/geocoded_location.dart';
 
 void main() {
   const _mockedGoogleApiKey = "GOOGLE_API_KEY";
@@ -9,7 +10,7 @@ void main() {
         googleApiKey: _mockedGoogleApiKey,
         width: 200,
         height: 300,
-        center: Location(-3.1467579, -59.8753814),
+        center: GeocodedLocation.latLng(-3.1467579, -59.8753814),
         zoom: 10,
         styles: [
           MapStyle(

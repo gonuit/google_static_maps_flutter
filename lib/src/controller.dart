@@ -18,10 +18,10 @@ class StaticMapController {
   /// on the map, though no markers or other indicators will be displayed.
   /// Use this parameter to ensure that certain features or map locations
   /// are shown on the Maps Static API.
-  final List<String> visible;
+  final List<GeocodedLocation>? visible;
 
   /// Defines the center of the map, equidistant from all edges of the map.
-  final Location? center;
+  final GeocodedLocation? center;
 
   /// defines the zoom level of the map, which determines the magnification
   /// level of the map. This parameter takes a numerical value corresponding
@@ -91,7 +91,6 @@ class StaticMapController {
     params["key"] = googleApiKey;
     params["size"] = "${width}x$height";
 
-    /// TODO: center could be string
     if (center != null) params["center"] = center!.toUrlString();
     if (language != null) params["language"] = language;
     if (maptype != null) params["maptype"] = maptype!.value;
@@ -175,7 +174,7 @@ class StaticMapController {
           "mapId cannot be provided together with styles argument.",
         ),
         // TODO: Add viewports support.
-        visible = const [];
+        visible = null;
 
   StaticMapController copyWith({
     String? googleApiKey,
@@ -183,7 +182,7 @@ class StaticMapController {
     int? height,
     List<Marker>? markers,
     List<Path>? paths,
-    Location? center,
+    GeocodedLocation? center,
     int? zoom,
     MapScale? scale,
     MapImageFormat? format,

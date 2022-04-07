@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_static_maps_controller/google_static_maps_controller.dart';
+import 'package:google_static_maps_controller/src/data/geocoded_location.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +13,7 @@ void main() {
         googleApiKey: _mockGoogleApiKey,
         height: 300,
         width: 200,
-        center: const Location(20, 30),
+        center: const GeocodedLocation.latLng(20, 30),
         zoom: 10,
         format: MapImageFormat.gif,
         language: "PL",
@@ -170,7 +171,7 @@ void main() {
         googleApiKey: _mockGoogleApiKey,
         height: 200,
         width: 200,
-        center: Location(-3.1467579, -59.8753814),
+        center: GeocodedLocation.latLng(-3.1467579, -59.8753814),
         zoom: 10,
         mapId: 'mockedID',
         styles: [

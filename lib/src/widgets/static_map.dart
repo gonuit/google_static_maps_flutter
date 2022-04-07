@@ -8,7 +8,7 @@ class StaticMap extends StatelessWidget {
   final List<Path>? paths;
 
   /// Defines the center of the map, equidistant from all edges of the map.
-  final Location? center;
+  final GeocodedLocation? center;
 
   /// Defines the zoom level of the map, which determines the magnification
   /// level of the map. This parameter takes a numerical value corresponding
