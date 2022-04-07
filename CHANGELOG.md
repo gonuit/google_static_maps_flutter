@@ -8,6 +8,7 @@
   - Added `PolylineEncoder` encoder.
 - Removed redundant white spaces from the genrated urls.
 - Added support for arithmetic operators to the `Location` class.
+- Added `GeocodedLocation` with the constructors `address` and `latLng`, which allows the user to define parameters such as `center` and `visible` not only by the lng lat values, but also by addresses.
 
 ## 0.6.0
 
