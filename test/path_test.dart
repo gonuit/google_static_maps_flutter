@@ -13,7 +13,7 @@ void main() {
       height: 300,
       width: 200,
       zoom: 10,
-      center: const GeocodedLocation.latLng(20, 30),
+      center: GeocodedLocation.latLng(20, 30),
       paths: [
         Path(
           color: Colors.red,
@@ -51,7 +51,7 @@ void main() {
   });
 
   test("geodesic property works correctly", () {
-    Path path = Path(
+    var path = const Path(
       geodesic: true,
       points: <Location>[
         Location(10, 10),
@@ -64,7 +64,7 @@ void main() {
       equals('geodesic:true|10.0,10.0|-10.0,10.0'),
     );
 
-    path = Path(
+    path = const Path(
       geodesic: false,
       points: <Location>[
         Location(10, 10),
@@ -77,7 +77,7 @@ void main() {
       equals('geodesic:false|10.0,10.0|-10.0,10.0'),
     );
 
-    path = Path(
+    path = const Path(
       points: <Location>[
         Location(10, 10),
         Location(-10, 10),
@@ -91,7 +91,7 @@ void main() {
   });
 
   test("geodesic property works correctly", () {
-    Path path = Path(
+    Path path = const Path(
       geodesic: true,
       points: <Location>[
         Location(10, 10),
@@ -104,7 +104,7 @@ void main() {
       equals('geodesic:true|10.0,10.0|-10.0,10.0'),
     );
 
-    path = Path(
+    path = const Path(
       geodesic: false,
       points: <Location>[
         Location(10, 10),
@@ -117,7 +117,7 @@ void main() {
       equals('geodesic:false|10.0,10.0|-10.0,10.0'),
     );
 
-    path = Path(
+    path = const Path(
       points: <Location>[
         Location(10, 10),
         Location(-10, 10),
@@ -131,7 +131,7 @@ void main() {
   });
 
   test("color property works correctly", () {
-    Path path = Path(
+    Path path = const Path(
       color: Color(0xFFFF0000),
       points: <Location>[
         Location(10, 10),
@@ -144,7 +144,7 @@ void main() {
       equals('color:0xFF0000FF|10.0,10.0|-10.0,10.0'),
     );
 
-    path = Path(
+    path = const Path(
       color: Color(0xAAFF0000),
       points: <Location>[
         Location(10, 10),
@@ -157,7 +157,7 @@ void main() {
       equals('color:0xFF0000AA|10.0,10.0|-10.0,10.0'),
     );
 
-    path = Path(
+    path = const Path(
       points: <Location>[
         Location(10, 10),
         Location(-10, 10),
@@ -171,7 +171,7 @@ void main() {
   });
 
   test("fillColor property works correctly", () {
-    Path path = Path(
+    Path path = const Path(
       fillColor: Color(0xFFFF0000),
       points: <Location>[
         Location(10, 10),
@@ -184,7 +184,7 @@ void main() {
       equals('fillcolor:0xFF0000FF|10.0,10.0|-10.0,10.0'),
     );
 
-    path = Path(
+    path = const Path(
       fillColor: Color(0xAAFF0000),
       points: <Location>[
         Location(10, 10),
@@ -197,7 +197,7 @@ void main() {
       equals('fillcolor:0xFF0000AA|10.0,10.0|-10.0,10.0'),
     );
 
-    path = Path(
+    path = const Path(
       points: <Location>[
         Location(10, 10),
         Location(-10, 10),
@@ -211,7 +211,7 @@ void main() {
   });
 
   test("weight property works correctly", () {
-    Path path = Path(
+    Path path = const Path(
       weight: 2,
       points: <Location>[
         Location(10, 10),
@@ -224,7 +224,7 @@ void main() {
       equals('weight:2|10.0,10.0|-10.0,10.0'),
     );
 
-    path = Path(
+    path = const Path(
       weight: 4,
       points: <Location>[
         Location(10, 10),
@@ -237,7 +237,7 @@ void main() {
       equals('weight:4|10.0,10.0|-10.0,10.0'),
     );
 
-    path = Path(
+    path = const Path(
       points: <Location>[
         Location(10, 10),
         Location(-10, 10),
@@ -250,7 +250,7 @@ void main() {
     );
   });
   test("Encoded property works correctly for the Path constructor.", () {
-    final notEncodedPath = Path(
+    const notEncodedPath = Path(
       weight: 2,
       encoded: false,
       points: <Location>[
@@ -265,7 +265,7 @@ void main() {
       equals('weight:2|38.5,-120.2|40.7,-120.95|43.252,-126.453'),
     );
 
-    final encodedPath = Path(
+    const encodedPath = Path(
       weight: 2,
       encoded: true,
       points: <Location>[
@@ -281,7 +281,7 @@ void main() {
     );
   });
   test("Encoded property works correctly for the Path.circle constructor.", () {
-    final notEncodedPath = Path.circle(
+    const notEncodedPath = Path.circle(
       weight: 2,
       radius: 5000,
       detail: 10,
@@ -307,7 +307,7 @@ void main() {
       ),
     );
 
-    final encodedPath = Path.circle(
+    const encodedPath = Path.circle(
       weight: 2,
       radius: 5000,
       detail: 10,
@@ -328,7 +328,7 @@ void main() {
   test(
       "Throws error when path toUrlString method is called for "
       "path with less than 2 points.", () {
-    Path path = Path(
+    Path path = const Path(
       points: <Location>[
         Location(10, 10),
       ],
@@ -339,7 +339,7 @@ void main() {
       throwsA(isA<StateError>()),
     );
 
-    path = Path(
+    path = const Path(
       points: <Location>[],
     );
 

@@ -96,6 +96,7 @@ abstract class Path implements EncodableUrlPart {
     return parts;
   }
 
+  @override
   String toUrlString() {
     if (points.length < 2) {
       throw StateError(
@@ -229,6 +230,7 @@ class _Path extends Path {
 }
 
 class EncodedPath extends Path {
+  @override
   List<Location> get points {
     throw UnimplementedError(
       "Currently points getter is not supported for predefined polylines.",

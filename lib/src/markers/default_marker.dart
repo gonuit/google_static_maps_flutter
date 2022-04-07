@@ -30,12 +30,17 @@ class DefaultMarker extends Marker {
     final markerSize = size?.value;
     if (markerSize != null) string += "size:$markerSize$_separator";
 
-    if (label != null) string += "label:${label![0].toUpperCase()}$_separator";
+    if (label != null) {
+      string += "label:${label![0].toUpperCase()}$_separator";
+    }
 
-    if (color != null)
+    if (color != null) {
       string += "color:${color!.to24BitHexString()}$_separator";
+    }
 
-    if (locations.isNotEmpty) string += _markerLocationsString;
+    if (locations.isNotEmpty) {
+      string += _markerLocationsString;
+    }
 
     return string;
   }

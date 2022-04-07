@@ -69,6 +69,7 @@ abstract class StyleRule implements EncodableUrlPart {
   /// in pixels. Setting the weight to a high value may result in clipping near tile borders.
   const factory StyleRule.weight(int weight) = _StyleWeightRule;
 
+  @override
   String toUrlString() => "$key:$value";
 
   @override
@@ -210,6 +211,7 @@ class MapStyle implements EncodableUrlPart {
     return parts.join(_separator);
   }
 
+  @override
   String toUrlString() {
     String url = "";
     if (feature != null) url += "feature:${feature!.value}$_separator";

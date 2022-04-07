@@ -5,7 +5,7 @@ void main() {
   test(
       "Throws error when marker toUrlString method is called for "
       "marker with no locations provided.", () {
-    Marker marker = Marker(
+    var marker = const Marker(
       locations: <Location>[],
     );
 
@@ -14,7 +14,7 @@ void main() {
       throwsA(isA<StateError>()),
     );
 
-    marker = Marker.custom(
+    marker = const Marker.custom(
       icon: "http://example.com/icon.png",
       locations: <Location>[],
     );

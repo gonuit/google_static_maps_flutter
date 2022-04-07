@@ -11,10 +11,10 @@ class Location implements EncodableUrlPart, GeocodedLocation {
   final double longitude;
 
   @override
-  bool operator ==(Object object) =>
-      object is Location &&
-      object.latitude == latitude &&
-      object.longitude == longitude;
+  bool operator ==(Object other) =>
+      other is Location &&
+      other.latitude == latitude &&
+      other.longitude == longitude;
 
   Location operator -(Object object) {
     if (object is num) {
@@ -85,6 +85,7 @@ class Location implements EncodableUrlPart, GeocodedLocation {
   String encode() =>
       "${PolylineEncoder.encode(latitude)}${PolylineEncoder.encode(longitude)}";
 
+  @override
   int get hashCode => hashValues(latitude, longitude);
 
   @override

@@ -103,9 +103,6 @@ class StaticMapController {
     if (markers != null) {
       params["markers"] = markers!.map(urlEncodeMapPart);
     }
-    if (paths != null) {
-      params["path"] = paths!.map(urlEncodeMapPart);
-    }
     if (visible != null) {
       params["visible"] = visible!.map(urlEncodeMapPart);
     }
@@ -119,6 +116,10 @@ class StaticMapController {
       params["map_id"] = mapId;
     } else if (styles != null) {
       params["style"] = styles!.map(urlEncodeMapPart);
+    }
+
+    if (paths != null) {
+      params["path"] = paths!.map(urlEncodeMapPart);
     }
 
     return params;

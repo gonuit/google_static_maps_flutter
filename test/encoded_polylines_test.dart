@@ -19,7 +19,7 @@ void main() {
   });
 
   test("Polylines path encoding works correctly.", () {
-    final data = PolylineEncoder.encodePath([
+    final data = PolylineEncoder.encodePath(const [
       Location(38.5, -120.2),
       Location(40.7, -120.95),
       Location(43.252, -126.453),
