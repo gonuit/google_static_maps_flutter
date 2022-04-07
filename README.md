@@ -25,7 +25,7 @@ The package provides simple and declarative access to the Google Static Maps ser
 
 ### Example map image
 
-![map_screenshot](./readme/screen_no_style.png)
+![map_screenshot](./readme/screen.png)
 
 ### source code:
 
