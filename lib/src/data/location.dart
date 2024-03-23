@@ -86,7 +86,7 @@ class Location implements EncodableUrlPart, GeocodedLocation {
       "${PolylineEncoder.encode(latitude)}${PolylineEncoder.encode(longitude)}";
 
   @override
-  int get hashCode => hashValues(latitude, longitude);
+  int get hashCode => Object.hash(latitude, longitude);
 
   @override
   String toUrlString() {

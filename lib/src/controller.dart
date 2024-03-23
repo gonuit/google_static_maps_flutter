@@ -171,7 +171,9 @@ class StaticMapController {
     this.signature,
     this.visible,
   })  : assert(
-          (center != null && zoom != null) || markers != null || visible != null,
+          (center != null && zoom != null) ||
+              markers != null ||
+              visible != null,
           "One of the following should be provided in order to draw a map: center & zoom, or markers, or visible.",
         ),
         assert(

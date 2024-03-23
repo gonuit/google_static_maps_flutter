@@ -1,3 +1,6 @@
+## 1.1.0
+- Updated SDK constraints
+- Fixed analysis issues
 ## 1.0.0
 
 - **BREAKING CHANGE** To draw a circle path use `Path.circle` instead of `Path` constructor.
